@@ -1,0 +1,82 @@
+*{ /* Reset CSS */
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+body{ /* Configurações do Body */
+  background-color: #0C0C0D !important;
+}
+
+h1{ /* Configuração dos H1 */
+  font-size: 20pt;
+}
+
+h2{ /* Configs H2 */
+  font-size: 17.5pt;
+}
+
+header{ /* Configurações do Header */
+  background: linear-gradient( #E09E04, #FCC30D);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.5%;
+}
+
+header h1{ /* Configuração do titulo do Header */
+  text-align: center;
+  width: 50%;
+}
+
+.anton-regular { /* Fonte Titulo  Header */
+  color: white;
+}
+
+p{ /* Editando o tamanho da fonte dos paragrafos */
+  font-size: 14.5pt;
+}
+
+section{ /* Configurações do Section */
+  padding-left: 100pt;
+  padding-right: 100pt;
+
+  padding-top: 1%;
+
+  color: white;
+}
+
+/* Carrosel */
+.carousel{
+  width: 50%;
+  height: auto;
+
+  background-color: #E09E04;
+  padding: 1px;
+  border-radius: 25pt;
+}
+
+.carousel img{
+  border-radius: 25pt;
+}
+
+/* NavBar */
+nav{
+  width: calc(100vw - 1.1%);
+  padding: 0.1%;
+  background: linear-gradient(#FCC30D ,#E09E04);
+}
+
+nav ul{
+  display: flex;
+  justify-content: space-evenly;
+
+  list-style: none;
+}
+
+li{
+  font-size: 14.5pt;
+}

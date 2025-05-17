@@ -1,0 +1,114 @@
+.formularioLogin{
+    background-color: white;
+    padding: 40pt;
+    
+    margin: 0 auto;
+    border-radius: 20pt;
+
+    width: 40%;
+    height: 28vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    color: black;
+
+    margin-top: 5%;
+}
+
+.formularioCadastro{
+    background-color: white;
+    padding: 40pt;
+    
+    margin: 0 auto;
+    border-radius: 20pt;
+
+    width: 40%;
+    min-height: 28vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    color: black;
+
+    margin-top: 1%;
+}
+
+.boxTitulo{
+    width: 90%;
+    padding: 1.5pt;
+    padding-bottom: 0pt;
+    /* align-self: flex-start; */
+    border-bottom: 3px solid orange;
+}
+
+.boxTitulo h2{
+    margin-bottom: 0pt;
+}
+
+.boxForm{
+    width: 100%;
+    padding: 5pt;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo{
+    width: 100%;
+}
+
+.input{
+    border: none;
+    border-radius: 5pt;
+    background-color: #d3d3d3;
+    padding: 2pt;
+}
+
+.input:focus{
+    outline: none;
+    border: none;
+}
+
+.containerInputs{
+    width: 95%;
+    height: 78%;
+}
+
+.botaoSubmit{
+    width: 50%;
+    border-radius: 50px;
+    
+    border: 1px solid grey;
+
+    background-color: transparent;
+
+    cursor: pointer;
+
+    transition: 5ms;
+
+    color: black;
+
+    margin-bottom: 5pt;
+}
+
+.botaoSubmit:hover{
+    background-color: orange;
+}
+
+.boxBtns{
+    width: 100%;
+    padding: 5pt;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 15pt;
+}
