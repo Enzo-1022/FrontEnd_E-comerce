@@ -4,34 +4,21 @@ interface Produtos {
 }
 
 export default async function CatalogoSecao () {
-    // var token = localStorage.getItem('Token');
-    // var login = localStorage.getItem('Login');
-
-    var token = null;
-    var login = null;
-
     try {
-        var catalogo = await fetch('http://localhost:3001/Usuarios/Catalogo', {
-            mode : "cors",
-            method : 'get',
-            headers : {
-                "Auth" : token == null? "false" : token,
-                "Login" : login == null? "false" : login
+        var response = await fetch(
+            'http://localhost:3001/Usuarios/Catalogo', 
+            
+            {
+                mode : "cors",
+                method : 'get',
+                credentials: 'include',
             }
-        }).then( res => res.json() );
+        );
+        console.log(response);
 
-        // if(!catalogo.Login)
-        // {
-        //     new Error('Usuario não encontrado');
-        // }
-        // else if (catalogo.sessao == 'expirada') 
-        // {
-        //     new Error('Tempo de sessão expirado');
-        // }
+        var catalogo = await response.json();
 
         var produtos = catalogo.Produtos;
-        
-        console.log(JSON.parse(JSON.stringify(catalogo)));
 
     } catch (error) {
         return (

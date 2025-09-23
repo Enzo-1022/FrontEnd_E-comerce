@@ -12,66 +12,46 @@ export default function BtnLogin ({email, senha}:{email:string, senha:string}) {
                 async () => {
                     try {
 
-                        let res = await fetch(
+                        var response = await fetch(
 
                             'http://localhost:3001/Login',
-
+                            
                             {
                                 mode: 'cors',
                                 method: 'post',
-                                body: new URLSearchParams({ Senha : senha, Email: email})
+                                body: new URLSearchParams({ Senha : senha, Email: email}),
+                                credentials: 'include',
                             }
 
-                        ).then( 
-                            ( res ) => {
-                                return res.json();
-                            }
                         );
 
-                        console.log(res);
+                        var login = await response.json();
 
-                        if (res.errors.status == 'Inexistente') 
+                        if(response.status == 400) // erro na requisicao (dados invalidos)
                         {
-                            // console.log('Não conseguimos te localizar em nossa base de dados, tente novamente!!!');
-                            alert('Não conseguimos te localizar em nossa base de dados, tente novamente!!!')
-                            // new Error('Não conseguimos te localizar em nossa base de dados, tente novamente!!!'); 
+                            console.error(login.Erro, response.status, response.statusText);
+                            alert(login.Erro);
+                            // Aqui para que eu possa renderizar o erro em um template posso criar um novo cookie com o erro e redirecionar para uma pagina de erro
+                            // ou posso usar um state global para armazenar o erro e renderizar na pagina de login
+                            // ou posso tentar returnar um componente react desse erro e renderizar na pagina de login
                         }
-                        else if (res.errors.status == 'Senha') 
+                        else if (response.status == 401) // nao autorizado
                         {
-                            // console.log(res.errors.status)
-                            // new Error(`${res.errors.erro}`);
-                            alert(res.errors.erro)
+                            console.error(login.Erro, response.status, response.statusText);
+                            alert(login.Erro);
                         }
-                        else 
+                        else if (response.status == 500) // erro no servidor
                         {
-                            if(localStorage.getItem('Login') == null)
-                            {
-                                localStorage.setItem('Login', res.Login);
-                            }
-                            else
-                            {
-                                localStorage.removeItem('Login');
-                                localStorage.setItem('Login', res.Login);
-                            }
-    
-                            if(localStorage.getItem('Autenticacao'))
-                            {
-                                localStorage.setItem("Autenticacao", JSON.stringify(res.Token));
-                            }
-                            else
-                            {
-                                localStorage.removeItem("Autenticacao");
-                                localStorage.setItem("Autenticacao", JSON.stringify(res.Token));
-                            }
-
-                            console.log(localStorage);
-
+                            console.error(login.Erro, response.status, response.statusText);
+                            alert(login.Erro);
+                        }
+                        else if (response.status == 200) // sucesso
+                        {
                             router.push('/Usuarios/Catalogo');
                         }
 
-
                     } catch (error) {
-                        console.log("foi")
+                        console.error(error);
                         alert(`UM ERRO INESPERADO ACONTECEU ${error}`);
                     }
                 }

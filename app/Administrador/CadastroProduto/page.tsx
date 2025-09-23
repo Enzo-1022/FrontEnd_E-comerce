@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import BtnCadastroProdutos from "@/app/UI/BtnCadastroProdutos/BtnCadastroProdutos";
 import React from "react";

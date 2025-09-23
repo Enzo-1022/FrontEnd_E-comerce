@@ -30,24 +30,39 @@ export default  function BtnCadastro (
                 async () => {
                     try {
                         
-                        var cadastro = await fetch(
+                        var response = await fetch(
                             'http://localhost:3001/Login/Cadastro', 
                             {
                                 mode: 'cors',
                                 method: 'post',
                                 body: new URLSearchParams({"Nome" : pNome, "Data_Nascimento": pDtNascimento, "Cpf" : pCpf, "Email": pEmail, "Senha" : pSenha})
                             }
-                        ).then( res => res.json() );
+                        )
+                        // Refatorei 16/09/2025, falta tratar o erro de senha diferente do confirmar senha e redireciona para pagina de erro
+                        var cadastro = await response.json(); // extrai o json da resposta
 
-                        if(cadastro.errors.length) 
+                        if(response.status == 400) // erro na requisicao (dados invalidos)
                         {
-                            console.error(cadastro.errors)
-                            alert("Erro");
+                            console.error(cadastro.Erro, response.status, response.statusText);
+                            alert(cadastro.Erro);
+                            // Aqui para que eu possa renderizar o erro em um template posso criar um novo cookie com o erro e redirecionar para uma pagina de erro
                         }
-                        else if (cadastro.resultado == 'ok')
+                        else if (response.status == 500) // erro no servidor
+                        {
+                            alert(cadastro.Erro);
+                        }
+                        else if (response.status == 409) // conflito
+                        {
+                            alert(cadastro.Erro);
+                        }
+                        else if (response.status == 201) // criado com sucesso
                         {
                             alert('Sucesso')
                             router.push('/Login');
+                        }
+                        else {
+                            console.error(response.status, response.statusText);
+                            alert('Erro desconhecido. Contate o suporte.')
                         }
                         
                     } catch (error) {

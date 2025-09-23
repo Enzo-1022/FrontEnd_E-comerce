@@ -1,3 +1,5 @@
+'use client';
+
 import style from '@/app/UI/login.module.css';
 
 interface Produtos {
@@ -12,27 +14,35 @@ async function cadastroProdutos({ nome, quantidade, descricao, preco } : Produto
     {
         let produto = { Nome : nome, Quantidade : quantidade, Descricao : descricao, Preco : preco };
 
-        let res = await fetch(
-            'http://localhost:3001/Administrador/CadastroProdutos',
+        var resposta = await fetch(
+
+            'http://localhost:3001/Admin/CadastroProduto',
+
             {
                 method : 'post',
                 mode : 'cors',
-                body : new URLSearchParams(JSON.stringify(produto)),
+                body : new URLSearchParams(produto),
             }
-        ).catch( res => res.json() );
 
-        if(res.status == 'sucesso')
+        ).then( 
+            ( res ) => { 
+                return res.json() 
+            } 
+        );
+
+        if(resposta.erro.status)
+
         {
-            return 'sucesso'
+            alert(`Um erro ocoreu!`);
         }
         else 
         {
-            return res.erro
+            alert(`Produto Cadastrado com sucesso!`);
         }
     } 
     catch (error) 
     {
-        return error
+        alert(error);
     }
 }
 

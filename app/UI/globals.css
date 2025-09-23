@@ -65,7 +65,7 @@ section{ /* Configurações do Section */
 
 /* NavBar */
 nav{
-  width: calc(100vw - 1.1%);
+  /* width: calc(100vw - 1.1%); */
   padding: 0.1%;
   background: linear-gradient(#FCC30D ,#E09E04);
 }
