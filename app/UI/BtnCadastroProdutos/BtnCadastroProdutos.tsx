@@ -12,9 +12,9 @@ interface Produtos {
 async function cadastroProdutos({ nome, quantidade, descricao, preco } : Produtos) {
     try 
     {
-        let produto = { Nome : nome, Quantidade : quantidade, Descricao : descricao, Preco : preco };
+        var produto = { Nome : nome, Quantidade : quantidade, Descricao : descricao, Preco : preco };
 
-        var resposta = await fetch(
+        var response = await fetch(
 
             'http://localhost:3001/Admin/CadastroProduto',
 
@@ -23,21 +23,26 @@ async function cadastroProdutos({ nome, quantidade, descricao, preco } : Produto
                 mode : 'cors',
                 body : new URLSearchParams(produto),
             }
-
-        ).then( 
-            ( res ) => { 
-                return res.json() 
-            } 
         );
 
-        if(resposta.erro.status)
+        var bodyResponse = await response.json();
 
+        if (response.status == 400) 
         {
-            alert(`Um erro ocoreu!`);
+            alert(`Má requisição, ${bodyResponse.Erro}`);
+        }
+        else if (response.status == 500)
+        {
+            alert(`${bodyResponse.Erro}`);
+        }
+        else if (response.status == 201)
+        {
+            console.log(bodyResponse.IdProduto)
+            alert(`Produto cadastrado com sucesso, ${bodyResponse.IdProduto.Id_Produto}`);
         }
         else 
         {
-            alert(`Produto Cadastrado com sucesso!`);
+            alert(`Erro desconhecido!!!`);
         }
     } 
     catch (error) 

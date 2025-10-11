@@ -3,8 +3,12 @@
 import style from "@/app/UI/login.module.css";
 import { useRouter } from "next/navigation";
 
+import { ErroContext } from "../context/erroContext";
+import { useContext } from "react";
+
 export default function BtnLogin ({email, senha}:{email:string, senha:string}) {
     const router = useRouter();
+    const erro = useContext(ErroContext);
 
     return (
         <button className={style.botaoSubmit} type="button" 
@@ -40,10 +44,11 @@ export default function BtnLogin ({email, senha}:{email:string, senha:string}) {
                             console.error(login.Erro, response.status, response.statusText);
                             alert(login.Erro);
                         }
-                        else if (response.status == 500) // erro no servidor
+                        else if (response.status == 500) // erro no servidor backend
                         {
                             console.error(login.Erro, response.status, response.statusText);
-                            alert(login.Erro);
+                            erro?.setErro(`${login.Erro}, ${response.status}, ${response.statusText}`)
+                            router.push('/Erro')
                         }
                         else if (response.status == 200) // sucesso
                         {
@@ -52,7 +57,9 @@ export default function BtnLogin ({email, senha}:{email:string, senha:string}) {
 
                     } catch (error) {
                         console.error(error);
-                        alert(`UM ERRO INESPERADO ACONTECEU ${error}`);
+                        erro?.setErro(`${error}`);
+                        router.push('/Erro');
+                        // alert(`UM ERRO INESPERADO ACONTECEU ${error}`);
                     }
                 }
             }

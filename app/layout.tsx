@@ -5,6 +5,7 @@ import "./UI/globals.css"; // Importando o css global
 import Header from "./UI/Header/header"; //importando o componente Header
 
 import { lusitana } from "./UI/font"; // Importando a fonte 
+import { ErroProvider } from "./UI/context/erroContext";
 
 export const metadata: Metadata = { // Meta tags
   title: "Simas Turbo",
@@ -19,17 +20,19 @@ export default function RootLayout(
   }>
 ) {
   return (
-    <html lang="pt-BR">
-      <head>
-        <style>
-          @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css');
-        </style>
-      </head>
+    <ErroProvider>
+      <html lang="pt-BR">
+        <head>
+          <style>
+            @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css');
+          </style>
+        </head>
 
-      <body className={lusitana.className}>
-        <Header />
-        {children}
-      </body>
-    </html>
+        <body className={lusitana.className}>
+          <Header />
+          {children}
+        </body>
+      </html>
+    </ErroProvider>
   );
 }
