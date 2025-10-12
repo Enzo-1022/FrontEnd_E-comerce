@@ -1,0 +1,28 @@
+.sectionErro{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+}
+
+.titleErro{
+    font-size: 45pt;
+    font-weight: bold;
+    color: #D9D9D9;
+}
+
+.linkVoltar{
+    width: 25%;
+    background: linear-gradient( #E09E04, #FCC30D);
+    padding: 2pt;
+    color: black;
+    font-weight: bolder;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 2px;
+}
+
+.subTitle{
+    margin-bottom: 10pt;
+}

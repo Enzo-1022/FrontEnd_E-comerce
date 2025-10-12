@@ -1,5 +1,7 @@
 export default function SobreNos () {
     return(
-        <p>Sobre nos</p>
+        <section>
+            <p>Sobre nos</p>
+        </section>
     )
 }

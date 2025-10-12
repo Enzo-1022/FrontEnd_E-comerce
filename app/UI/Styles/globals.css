@@ -9,6 +9,11 @@ body{ /* Configurações do Body */
   background-color: #0C0C0D !important;
 }
 
+body,html{
+  height: 100%;
+  width: 100%;
+}
+
 h1{ /* Configuração dos H1 */
   font-size: 20pt;
 }
@@ -30,6 +35,7 @@ header{ /* Configurações do Header */
 header h1{ /* Configuração do titulo do Header */
   text-align: center;
   width: 50%;
+  cursor: pointer;
 }
 
 .anton-regular { /* Fonte Titulo  Header */
@@ -82,6 +88,6 @@ li{
   color: white;
 }
 
-a{
-  color: white;
+nav a{
+  color: white !important;
 }

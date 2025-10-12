@@ -1,12 +1,13 @@
 'use client'
 
-import style from "@/app/UI/login.module.css";
+import style from "@/app/UI/Styles/login.module.css";
 import { useRouter } from "next/navigation";
 
-import { ErroContext } from "../context/erroContext";
+import { ErroContext } from "@/app/UI/context/erroContext";
 import { useContext } from "react";
+import { Logins } from "@/app/types/typeLogins";
 
-export default function BtnLogin ({email, senha}:{email:string, senha:string}) {
+export default function BtnLogin ({pEmail, pSenha} : Logins) {
     const router = useRouter();
     const erro = useContext(ErroContext);
 
@@ -23,7 +24,7 @@ export default function BtnLogin ({email, senha}:{email:string, senha:string}) {
                             {
                                 mode: 'cors',
                                 method: 'post',
-                                body: new URLSearchParams({ Senha : senha, Email: email}),
+                                body: new URLSearchParams({ Senha : pSenha, Email: pEmail}),
                                 credentials: 'include',
                             }
 
@@ -58,8 +59,8 @@ export default function BtnLogin ({email, senha}:{email:string, senha:string}) {
                     } catch (error) {
                         console.error(error);
                         erro?.setErro(`${error}`);
+                        erro?.setUrl('/Login');
                         router.push('/Erro');
-                        // alert(`UM ERRO INESPERADO ACONTECEU ${error}`);
                     }
                 }
             }

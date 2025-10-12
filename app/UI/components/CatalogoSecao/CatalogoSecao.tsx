@@ -1,12 +1,5 @@
 import { cookies } from 'next/headers';
-
-interface Produtos {
-    Nome : string,
-    Id_Produto : number,
-    Descricao : string,
-    Quantidade : number,
-    Preco : number
-}
+import { Produtos } from '@/app/types/typeProdutos';
 
 export default async function CatalogoSecao () {
     try {
@@ -36,18 +29,20 @@ export default async function CatalogoSecao () {
             var produtos = catalogo.Produtos; // Pegando a propriedade produtos do Body json da requisição
             
             return(
-                <ul>
-                    {
-                        produtos.map(
-                            (produto:Produtos) => {
-                                return <li key={produto.Id_Produto}>{produto.Nome}</li>
-                            }
-                        )
-                    }
-                </ul>
+                <section>
+                    <ul>
+                        {
+                            produtos.map(
+                                (produto:Produtos) => {
+                                    return <li key={produto.Id_Produto}>{produto.Nome}</li>
+                                }
+                            )
+                        }
+                    </ul>
+                </section>
             );
         }
-        else // qualquer outro status que nõa seja 200 ok, gerará um novo erro que será tratado pelo try catch
+        else // qualquer outro status que não seja 200 ok, gerará um novo erro que será tratado pelo try catch
         {
             throw new Error(response.statusText) // Aqui podemos ver outro método para tratarmos essas exeções, se status da requisição for 401 ou 500 gerará um novo erro e esse erro irá automaticamente para o catch e no catch existe um tratamento geral dos erros/exeções
         }

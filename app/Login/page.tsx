@@ -1,8 +1,8 @@
 'use client';
 
-import style from '@/app/UI/login.module.css';
+import style from '@/app/UI/Styles/login.module.css';
 import React from 'react';
-import BtnLogin from '../UI/BtnLogin/btnLogin';
+import BtnLogin from '../UI/components/BtnLogin/btnLogin';
 
 export default function Login () {
     var [email1, setEmail] = React.useState('');
@@ -28,7 +28,7 @@ export default function Login () {
                     </div>
 
                     <div className={style.boxBtns}>
-                        <BtnLogin email={email1} senha={senha1}/>
+                        <BtnLogin pEmail={email1} pSenha={senha1}/>
                         <span>Não possui conta? <a href="/Cadastro">Cadastre-se</a></span>
                     </div>
                 </div>

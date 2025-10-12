@@ -2,9 +2,14 @@
 
 import { useRouter } from 'next/navigation';
 
-import style from '@/app/UI/login.module.css';
+import style from '@/app/UI/Styles/login.module.css';
 
-export default  function BtnCadastro (
+import { ErroContext } from '../../context/erroContext';
+import { useContext } from 'react';
+import { TypeUsuarios } from '@/app/types/typeUsuarios';
+import Usuarios from '@/app/Services/Usuarios'
+
+export default function BtnCadastro (
     { 
         pNome, 
         pDtNascimento, 
@@ -12,17 +17,12 @@ export default  function BtnCadastro (
         pEmail, 
         pSenha, 
         pConfSenha
-    } : {
-        pNome : string,
-        pDtNascimento : string,
-        pCpf : string,
-        pEmail : string,
-        pSenha : string,
-        pConfSenha : string
-    }
+    } :TypeUsuarios
 ) {
 
     const router = useRouter();
+    const erro = useContext(ErroContext);
+    // const NovoUsuario = new Usuarios({pNome, pDtNascimento, pCpf, pEmail, pSenha, pConfSenha});
 
     return (
         <button type="button" className={style.botaoSubmit}
@@ -49,7 +49,9 @@ export default  function BtnCadastro (
                         }
                         else if (response.status == 500) // erro no servidor
                         {
-                            alert(cadastro.Erro);
+                            erro?.setErro(`${cadastro.Erro}`)
+                            erro?.setUrl(`/Cadastro`)
+                            router.push('/Erro')
                         }
                         else if (response.status == 409) // conflito
                         {
@@ -62,11 +64,15 @@ export default  function BtnCadastro (
                         }
                         else {
                             console.error(response.status, response.statusText);
-                            alert('Erro desconhecido. Contate o suporte.')
+                            erro?.setErro(`${response.status, response.statusText}`);
+                            erro?.setUrl('/Cadastro');
+                            router.push('/Erro');
                         }
                         
                     } catch (error) {
-                        alert(error);
+                       erro?.setErro(`${error}`);
+                       erro?.setUrl(`/Cadastro`);
+                       router.push('/Erro');
                     }
                 }
             }

@@ -1,10 +1,10 @@
 import type { Metadata } from "next"; // Inportando as meta tags para podermos usarmos
 
-import "./UI/globals.css"; // Importando o css global
+import "./UI/styles/globals.css"; // Importando o css global
 
-import Header from "./UI/Header/header"; //importando o componente Header
+import Header from "./UI/components/Header/header"; //importando o componente Header
 
-import { lusitana } from "./UI/font"; // Importando a fonte 
+import { lusitana } from "./UI/Fonts/font"; // Importando a fonte 
 import { ErroProvider } from "./UI/context/erroContext";
 
 export const metadata: Metadata = { // Meta tags

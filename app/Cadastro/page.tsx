@@ -1,10 +1,10 @@
 'use client';
 
-import style from '@/app/UI/login.module.css';
+import style from '@/app/UI/styles/login.module.css';
 
 import React from 'react';
 
-import BtnCadastro from '@/app/UI/BtnCadastro/btnCadastro';
+import BtnCadastro from '@/app/UI/components/BtnCadastro/btnCadastro';
 
 export default function Cadastro() {
 

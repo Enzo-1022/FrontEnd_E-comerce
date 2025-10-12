@@ -1,6 +1,6 @@
-import Carrosel from "./UI/Carrosel/carrosel";
-import NavBar from "./UI/NavBar/navbar";
-import styles from "./UI/page.module.css";
+import Carrosel from "./UI/components/Carrosel/carrosel";
+import NavBar from "./UI/components/NavBar/navbar";
+import styles from "./UI/styles/page.module.css";
 
 export default function Home() {
   return (

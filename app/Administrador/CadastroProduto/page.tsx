@@ -1,8 +1,8 @@
 'use client';
 
-import BtnCadastroProdutos from "@/app/UI/BtnCadastroProdutos/BtnCadastroProdutos";
+import BtnCadastroProdutos from "@/app/UI/components/BtnCadastroProdutos/BtnCadastroProdutos";
 import React from "react";
-import style from '@/app/UI/login.module.css';
+import style from '@/app/UI/Styles/login.module.css';
 
 export default function CadastroProdutos() {
 
@@ -42,7 +42,7 @@ export default function CadastroProdutos() {
                     </div>
 
                     <div className={style.boxBtns}>
-                        <BtnCadastroProdutos nome={nomeProduto} quantidade={quantidadeProduto} preco={precoProduto} descricao={descicaoProduto}/>
+                        <BtnCadastroProdutos pNome={nomeProduto} pQuantidade={quantidadeProduto} pPreco={precoProduto} pDescricao={descicaoProduto}/>
                     </div>
 
                 </div>
