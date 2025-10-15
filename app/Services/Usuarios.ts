@@ -1,7 +1,4 @@
-import { useContext } from "react";
 import { TypeUsuarios } from "../types/typeUsuarios";
-import { ErroContext } from "../UI/context/erroContext";
-import { useRouter } from "next/navigation";
 
 export default class Usuarios{
 
@@ -21,7 +18,7 @@ export default class Usuarios{
         this.ConfirmarSenha = pConfSenha;  
     }
 
-    async CadastroUsuario() {
+    async CadastroUsuario(): Promise<{Response?: Response,  BodyResponse?: any, error?:unknown}> {
         try {
             const Response = await fetch(
                 'http://localhost:3001/Login/Cadastro',
@@ -43,8 +40,8 @@ export default class Usuarios{
 
             return {Response, BodyResponse}
 
-        } catch (error) {
-            return error
+        } catch (error:unknown) {
+            return {error}
         }
     }
 }
