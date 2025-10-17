@@ -44,4 +44,22 @@ export default class Usuarios{
             return {error}
         }
     }
+
+    static async Login(pEmail:string, pSenha:string): Promise<{BodyResponse?: any, Response?: Response, error?:unknown}>{
+        try {
+            const Response = await fetch('http://localhost:3001/Login',{
+                method: 'post',
+                mode: 'cors',
+                body: new URLSearchParams({Senha: pSenha, Email: pEmail}),
+                credentials: 'include'
+            });
+
+            const BodyResponse = await Response.json();
+
+            return {Response, BodyResponse}
+            
+        } catch (error:unknown) {
+            return {error};
+        }
+    }
 }
