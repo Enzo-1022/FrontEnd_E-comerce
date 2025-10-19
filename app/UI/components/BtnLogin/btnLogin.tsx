@@ -18,50 +18,55 @@ export default function BtnLogin ({pEmail, pSenha} : Logins) {
                 async () => {
                     try {
 
-                        // var response = await fetch(
+                        if (pEmail == '' || pSenha == '') 
+                        {
+                            erro?.setNotify({
+                                Title : "Dados Invalidos!",
+                                Messege : "Inputs vazios!"
+                            });
 
-                        //     'http://localhost:3001/Login',
-                            
-                        //     {
-                        //         mode: 'cors',
-                        //         method: 'post',
-                        //         body: new URLSearchParams({ Senha : pSenha, Email: pEmail}),
-                        //         credentials: 'include',
-                        //     }
+                            return; 
+                        }
 
-                        // );
-
-                        // var login = await response.json();
                         const response = await Usuarios.Login(pEmail, pSenha);
 
                         if(response.Response?.status == 400) // erro na requisicao (dados invalidos)
                         {
-                            console.error(response.BodyResponse?.Erro, response.Response?.status, response.Response?.statusText);
-                            alert(response.BodyResponse.Erro);
-                            // Aqui para que eu possa renderizar o erro em um template posso criar um novo cookie com o erro e redirecionar para uma pagina de erro
-                            // ou posso usar um state global para armazenar o erro e renderizar na pagina de login
-                            // ou posso tentar returnar um componente react desse erro e renderizar na pagina de login
+                            erro?.setNotify({
+                                Title : "Dados Invalidos!",
+                                Messege : response.BodyResponse?.Erro
+                            });
+
+                            return;
                         }
-                        else if (response.Response?.status == 401) // nao autorizado
+
+                        if (response.Response?.status == 401) // nao autorizado
                         {
-                            console.error(response.BodyResponse?.Erro, response.Response?.status, response.Response?.statusText);
-                            alert(response.BodyResponse?.Erro);
+                            erro?.setNotify({
+                                Title : "Não autorizado!",
+                                Messege : response.BodyResponse?.Erro
+                            });
+
+                            return;
                         }
-                        else if (response.Response?.status == 500) // erro no servidor backend
+
+                        if (response.Response?.status == 500) // erro no servidor backend
                         {
-                            console.error(response.BodyResponse?.Erro, response.Response?.status, response.Response?.statusText);
-                            erro?.setErro(`${response.BodyResponse?.Erro}, ${response.Response?.status}, ${response.Response?.statusText}`)
-                            router.push('/Erro')
+                            erro?.setErro(`${response.BodyResponse?.Erro}, ${response.Response?.status}, ${response.Response?.statusText}`);
+                            router.push('/Erro');
+
+                            return;
                         }
-                        else if (response.Response?.status == 200) // sucesso
+                        
+                        if (response.Response?.status == 200) // sucesso
                         {
                             router.push('/Usuarios/Catalogo');
+
+                            return;
                         }
-                        else 
-                        {
-                            erro?.setErro(`${response.error}`)
-                            router.push('/Erro')
-                        }
+
+                        erro?.setErro(`${response.error}`)
+                        router.push('/Erro')
 
                     } catch (error) {
                         console.error(error);
