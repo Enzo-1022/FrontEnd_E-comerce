@@ -18,9 +18,10 @@ export const ErroProvider = (
         Title: undefined,
         Message : undefined
     })
+    const [loading, setLoading] = useState<boolean>(false)
 
     return(
-        <ErroContext.Provider value={{erro, setErro, url, setUrl, notify, setNotify}}>
+        <ErroContext.Provider value={{erro, setErro, url, setUrl, notify, setNotify, loading, setLoading}}>
             {children}
         </ErroContext.Provider>
     )

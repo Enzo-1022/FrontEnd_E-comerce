@@ -5,4 +5,6 @@ export type ErroState = {
     setUrl: (valor:string) => void;
     notify : { Title? : string | undefined, Messege? : string | undefined },
     setNotify : (valor:object) => void;
+    loading : boolean
+    setLoading : (valor:boolean) => void
 }

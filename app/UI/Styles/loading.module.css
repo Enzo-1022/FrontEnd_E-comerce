@@ -1,0 +1,25 @@
+.boxLoading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80%;
+}
+
+.spanCarregando{
+    font-size: 20pt;
+    color: white;
+    animation: Load 0.5s infinite;
+}
+
+@keyframes Load {
+    0%{
+        opacity: 0.1;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0.1;
+    }
+}

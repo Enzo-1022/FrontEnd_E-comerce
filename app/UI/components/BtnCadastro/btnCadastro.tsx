@@ -28,12 +28,16 @@ export default function BtnCadastro (
             onClick={
                 async () => {
 
+                    erro?.setLoading(true)
+
                     if(pNome == '' || pDtNascimento == '' || pCpf == '' || pEmail == '' || pSenha == '' || pConfSenha == '')
                     {
                         erro?.setNotify({
                             Title : "Dados Invalidos!",
-                            Messege : "Alguns dos inputs se encontra vazio"
+                            Messege : "Alguns dos inputs se encontram vazios"
                         })
+
+                        erro?.setLoading(false)
                         return;
                     }
                     
@@ -41,8 +45,9 @@ export default function BtnCadastro (
                     {
                         erro?.setNotify({
                             Title : "Senha invalida",
-                            Messege : "A senha informada está diferente da senha digitada no comfirmar senha"
+                            Messege : "A senha informada está diferente da senha digitada ao confirmar senha!"
                         })
+                        erro?.setLoading(false)
 
                         return;
                     }
@@ -66,6 +71,7 @@ export default function BtnCadastro (
                                 Title: 'Erro',
                                 Messege: cadastro.Erro
                             });
+                            erro?.setLoading(false)
                             return;
                             // Aqui para que eu possa renderizar o erro em um template posso criar um novo cookie com o erro e redirecionar para uma pagina de erro
                         }
@@ -75,7 +81,7 @@ export default function BtnCadastro (
                             erro?.setErro(`${cadastro.Erro}`)
                             erro?.setUrl(`/Cadastro`)
                             router.push('/Erro')
-
+                            erro?.setLoading(false)
                             return;
                         }
                         
@@ -85,7 +91,7 @@ export default function BtnCadastro (
                                 Title: 'Erro',
                                 Messege: cadastro.Erro
                             });
-
+                            erro?.setLoading(false)
                             return;
                         }
                         
@@ -96,6 +102,7 @@ export default function BtnCadastro (
                                 Messege: 'Cadastro Bem Sucedido'
                             });
                             router.push('/Login');
+                            erro?.setLoading(false)
 
                             return;
                         }
@@ -106,6 +113,7 @@ export default function BtnCadastro (
                         erro?.setErro(`${error}`);
                         erro?.setUrl(`/Cadastro`);
                         router.push('/Erro');
+                        erro?.setLoading(false)
                     }
                 }
             }

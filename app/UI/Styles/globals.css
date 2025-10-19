@@ -49,6 +49,7 @@ p{ /* Editando o tamanho da fonte dos paragrafos */
 section{ /* Configurações do Section */
   padding-left: 100pt;
   padding-right: 100pt;
+  height: 100%;
 
   padding-top: 1%;
 

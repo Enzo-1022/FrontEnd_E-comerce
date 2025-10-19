@@ -17,6 +17,7 @@ export default function BtnLogin ({pEmail, pSenha} : Logins) {
             onClick={ 
                 async () => {
                     try {
+                        erro?.setLoading(true);
 
                         if (pEmail == '' || pSenha == '') 
                         {
@@ -24,6 +25,8 @@ export default function BtnLogin ({pEmail, pSenha} : Logins) {
                                 Title : "Dados Invalidos!",
                                 Messege : "Inputs vazios!"
                             });
+
+                            erro?.setLoading(false)
 
                             return; 
                         }
@@ -37,6 +40,8 @@ export default function BtnLogin ({pEmail, pSenha} : Logins) {
                                 Messege : response.BodyResponse?.Erro
                             });
 
+                            erro?.setLoading(false)
+
                             return;
                         }
 
@@ -47,6 +52,8 @@ export default function BtnLogin ({pEmail, pSenha} : Logins) {
                                 Messege : response.BodyResponse?.Erro
                             });
 
+                            erro?.setLoading(false)
+
                             return;
                         }
 
@@ -55,6 +62,8 @@ export default function BtnLogin ({pEmail, pSenha} : Logins) {
                             erro?.setErro(`${response.BodyResponse?.Erro}, ${response.Response?.status}, ${response.Response?.statusText}`);
                             router.push('/Erro');
 
+                            erro?.setLoading(false)
+
                             return;
                         }
                         
@@ -62,17 +71,23 @@ export default function BtnLogin ({pEmail, pSenha} : Logins) {
                         {
                             router.push('/Usuarios/Catalogo');
 
+                            erro?.setLoading(false)
+
                             return;
                         }
 
-                        erro?.setErro(`${response.error}`)
-                        router.push('/Erro')
+                        erro?.setErro(`${response.error}`);
+
+                        router.push('/Erro');
+
+                        erro?.setLoading(false);
 
                     } catch (error) {
                         console.error(error);
                         erro?.setErro(`${error}`);
                         erro?.setUrl('/Login');
                         router.push('/Erro');
+                        erro?.setLoading(false)
                     }
                 }
             }
