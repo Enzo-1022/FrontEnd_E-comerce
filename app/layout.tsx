@@ -7,6 +7,8 @@ import Header from "./UI/components/Header/header"; //importando o componente He
 import { lusitana } from "./UI/Fonts/font"; // Importando a fonte 
 import { ErroProvider } from "./UI/context/erroContext";
 
+import NotifyBox from "./UI/components/NotifyBox/NotifyBox";
+
 export const metadata: Metadata = { // Meta tags
   title: "Simas Turbo",
   description: ""
@@ -30,6 +32,7 @@ export default function RootLayout(
 
         <body className={lusitana.className}>
           <Header />
+          <NotifyBox />
           {children}
         </body>
       </html>

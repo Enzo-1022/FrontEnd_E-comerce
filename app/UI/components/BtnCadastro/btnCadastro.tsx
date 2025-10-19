@@ -19,101 +19,89 @@ export default function BtnCadastro (
         pConfSenha
     } :TypeUsuarios
 ) {
-
-    const router = useRouter();
+    
     const erro = useContext(ErroContext);
-    const NovoUsuario = new Usuarios({pNome, pDtNascimento, pCpf, pEmail, pSenha, pConfSenha});
-
+    const router = useRouter();
+        
     return (
         <button type="button" className={style.botaoSubmit}
             onClick={
-                // async () => {
-                //     try {
-                        
-                //         var response = await fetch(
-                //             'http://localhost:3001/Login/Cadastro', 
-                //             {
-                //                 mode: 'cors',
-                //                 method: 'post',
-                //                 body: new URLSearchParams({"Nome" : pNome, "Data_Nascimento": pDtNascimento, "Cpf" : pCpf, "Email": pEmail, "Senha" : pSenha})
-                //             }
-                //         )
-                //         // Refatorei 16/09/2025, falta tratar o erro de senha diferente do confirmar senha e redireciona para pagina de erro
-                //         var cadastro = await response.json(); // extrai o json da resposta
-
-                //         if(response.status == 400) // erro na requisicao (dados invalidos)
-                //         {
-                //             console.error(cadastro.Erro, response.status, response.statusText);
-                //             alert(cadastro.Erro);
-                //             // Aqui para que eu possa renderizar o erro em um template posso criar um novo cookie com o erro e redirecionar para uma pagina de erro
-                //         }
-                //         else if (response.status == 500) // erro no servidor
-                //         {
-                //             erro?.setErro(`${cadastro.Erro}`)
-                //             erro?.setUrl(`/Cadastro`)
-                //             router.push('/Erro')
-                //         }
-                //         else if (response.status == 409) // conflito
-                //         {
-                //             alert(cadastro.Erro);
-                //         }
-                //         else if (response.status == 201) // criado com sucesso
-                //         {
-                //             alert('Sucesso')
-                //             router.push('/Login');
-                //         }
-                //         else {
-                //             console.error(response.status, response.statusText);
-                //             erro?.setErro(`${response.status, response.statusText}`);
-                //             erro?.setUrl('/Cadastro');
-                //             router.push('/Erro');
-                //         }
-                        
-                //     } catch (error) {
-                //        erro?.setErro(`${error}`);
-                //        erro?.setUrl(`/Cadastro`);
-                //        router.push('/Erro');
-                //     }
-                // }
                 async () => {
+
+                    if(pNome == '' || pDtNascimento == '' || pCpf == '' || pEmail == '' || pSenha == '' || pConfSenha == '')
+                    {
+                        erro?.setNotify({
+                            Title : "Dados Invalidos!",
+                            Messege : "Alguns dos inputs se encontra vazio"
+                        })
+                        return;
+                    }
+                    
+                    if (pSenha != pConfSenha) 
+                    {
+                        erro?.setNotify({
+                            Title : "Senha invalida",
+                            Messege : "A senha informada está diferente da senha digitada no comfirmar senha"
+                        })
+
+                        return;
+                    }
+
+                    const NovoUsuario = new Usuarios({pNome, pDtNascimento, pCpf, pEmail, pSenha, pConfSenha});
                     const CadastroUser = await NovoUsuario.CadastroUsuario(); // Utilizando o Método de Cadastro do usuario
-                    const response = CadastroUser?.Response; // Gaurdando a Response aqui
+                    const response = CadastroUser?.Response ; // Gaurdando a Response aqui
                     const cadastro = CadastroUser?.BodyResponse; // Guardando o BodyResponse
 
                     try {
+
                         if(CadastroUser?.error != undefined)
                         {
-                            erro?.setErro(`${CadastroUser?.error}`);
-                            erro?.setUrl(`/Cadastro`);
-                            router.push('/Erro');
+                            throw new Error(String(CadastroUser?.error))
                         }
-                        else if(response?.status == 400) // erro na requisicao (dados invalidos)
+
+                        if(response?.status == 400) // erro na requisicao (dados invalidos)
                         {
                             console.error(cadastro.Erro, response.status, response.statusText);
-                            alert(cadastro.Erro);
+                            erro?.setNotify({
+                                Title: 'Erro',
+                                Messege: cadastro.Erro
+                            });
+                            return;
                             // Aqui para que eu possa renderizar o erro em um template posso criar um novo cookie com o erro e redirecionar para uma pagina de erro
                         }
-                        else if (response?.status == 500) // erro no servidor
+                        
+                        if (response?.status == 500) // erro no servidor
                         {
                             erro?.setErro(`${cadastro.Erro}`)
                             erro?.setUrl(`/Cadastro`)
                             router.push('/Erro')
+
+                            return;
                         }
-                        else if (response?.status == 409) // conflito
+                        
+                        if (response?.status == 409) // conflito
                         {
-                            alert(cadastro.Erro);
+                            erro?.setNotify({
+                                Title: 'Erro',
+                                Messege: cadastro.Erro
+                            });
+
+                            return;
                         }
-                        else if (response?.status == 201) // criado com sucesso
+                        
+                        if (response?.status == 201) // criado com sucesso
                         {
-                            alert('Sucesso')
+                            erro?.setNotify({
+                                Title: 'Sucesso',
+                                Messege: 'Cadastro Bem Sucedido'
+                            });
                             router.push('/Login');
+
+                            return;
                         }
-                        else {
-                            console.error(response?.status, response?.statusText);
-                            erro?.setErro(`${response?.status, response?.statusText}`);
-                            erro?.setUrl('/Cadastro');
-                            router.push('/Erro');
-                        }
+
+                        throw new Error("undefined error");
+
                     } catch (error) {
                         erro?.setErro(`${error}`);
                         erro?.setUrl(`/Cadastro`);

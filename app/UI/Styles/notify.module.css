@@ -1,0 +1,49 @@
+.marginZero{
+    margin: 0 !important;
+    padding: 0;
+}
+
+.boxNotify{
+    position: absolute;
+    width: 30%;
+    padding: 5pt;
+    color: white;
+    left: 2%;
+    bottom: 10;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: none;
+
+    background-color: rgba(250, 41, 0, 0.2);
+    color: white;
+    border-bottom: 5px solid red;
+    border-radius: 5px;
+}
+
+.boxDisable{
+    display: none;
+}
+
+.button{
+    width: 10%;
+    background-color: transparent;
+    border: none;
+}
+
+.boxTitle{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bolder;
+}
+
+.img{
+    width: 7%;
+}
+
+.imgETitle{
+    display: flex;
+    align-items: center;
+    gap: 5pt;
+}

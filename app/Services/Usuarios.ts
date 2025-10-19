@@ -2,12 +2,12 @@ import { TypeUsuarios } from "../types/typeUsuarios";
 
 export default class Usuarios{
 
-    private Nome;
-    private Email;
-    private DataNascimento;
-    private Cpf;
-    private Senha;
-    private ConfirmarSenha;
+    private Nome : string;
+    private Email : string;
+    private DataNascimento : string;
+    private Cpf : string;
+    private Senha : string;
+    private ConfirmarSenha : string;
 
     constructor({pNome, pEmail, pDtNascimento, pCpf, pSenha, pConfSenha} : TypeUsuarios) {
         this.Nome = pNome;
