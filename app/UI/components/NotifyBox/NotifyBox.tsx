@@ -3,8 +3,6 @@
 import style from '@/app/UI/Styles/notify.module.css'
 import { ErroContext } from '@/app/UI/context/erroContext';
 import { useContext } from 'react';
-// import {warning.png} from '@/public/imgs/warning.png'
-
 
 export default function NotifyBox() {
     const erro = useContext(ErroContext);
@@ -13,7 +11,7 @@ export default function NotifyBox() {
         <div className={ erro?.notify.Title != undefined? style.boxNotify : style.boxDisable } >
             <div className={style.boxTitle}>
                 <div className={style.imgETitle}>
-                    <img src='imgs\warning (1).png' alt="warning" className={style.img}/>
+                    <img src='/imgs/warning.png' alt="warning" className={style.img}/>
                     <h5 className={style.marginZero}>{erro?.notify.Title}</h5>
                 </div>
                 <button className={style.button} onClick={

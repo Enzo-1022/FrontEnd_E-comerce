@@ -26,8 +26,6 @@ export default function BtnLogin ({pEmail, pSenha} : Logins) {
                                 Messege : "Inputs vazios!"
                             });
 
-                            erro?.setLoading(false)
-
                             return; 
                         }
 
@@ -40,8 +38,6 @@ export default function BtnLogin ({pEmail, pSenha} : Logins) {
                                 Messege : response.BodyResponse?.Erro
                             });
 
-                            erro?.setLoading(false)
-
                             return;
                         }
 
@@ -52,8 +48,6 @@ export default function BtnLogin ({pEmail, pSenha} : Logins) {
                                 Messege : response.BodyResponse?.Erro
                             });
 
-                            erro?.setLoading(false)
-
                             return;
                         }
 
@@ -62,16 +56,12 @@ export default function BtnLogin ({pEmail, pSenha} : Logins) {
                             erro?.setErro(`${response.BodyResponse?.Erro}, ${response.Response?.status}, ${response.Response?.statusText}`);
                             router.push('/Erro');
 
-                            erro?.setLoading(false)
-
                             return;
                         }
                         
                         if (response.Response?.status == 200) // sucesso
                         {
-                            router.push('/Usuarios/Catalogo');
-
-                            erro?.setLoading(false)
+                            await router.push('/Usuarios/Catalogo');
 
                             return;
                         }
@@ -80,13 +70,13 @@ export default function BtnLogin ({pEmail, pSenha} : Logins) {
 
                         router.push('/Erro');
 
-                        erro?.setLoading(false);
-
                     } catch (error) {
                         console.error(error);
                         erro?.setErro(`${error}`);
                         erro?.setUrl('/Login');
                         router.push('/Erro');
+                        
+                    } finally {
                         erro?.setLoading(false)
                     }
                 }
