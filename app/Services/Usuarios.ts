@@ -1,5 +1,7 @@
 import { TypeUsuarios } from "../types/typeUsuarios";
 
+// import { cookies } from "next/headers";
+
 export default class Usuarios{
 
     private Nome : string;
@@ -59,6 +61,31 @@ export default class Usuarios{
             return {Response, BodyResponse}
             
         } catch (error:unknown) {
+            return {error};
+        }
+    }
+
+    static async BuscaUsuario (token:string) { // Possivelmente irá ter um erro?
+        try {
+            // const cookiesStorage = await cookies();
+            // var token = cookiesStorage.get('sessionToken');
+
+            const Response = await fetch('http://localhost:3001/Usuarios/Perfil', {
+                mode:'cors',
+                method: 'get',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json', // Tipo de conteudo da requisição
+                    "authorization": `Bearer ${token}`, // Cabeçalho para passarmos os tokens de autorização
+                    "accept" : 'application/json' // Conteudo que aceitamos como resposta 
+                }
+            });
+
+            const BodyResponse =  await Response.json();
+
+            return {Response, BodyResponse};
+
+        } catch (error) {
             return {error};
         }
     }
