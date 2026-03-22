@@ -17,7 +17,7 @@ export default function Login () {
     return(
         <section>
             {
-                !context?.loading?
+                
                     <form action="" method="get" className={style.formularioLogin}>
                         <div className={style.boxTitulo}>
                             <h2 className={style.titulo}>Login</h2>
@@ -39,8 +39,7 @@ export default function Login () {
                                 <span>Não possui conta? <a href="/Cadastro">Cadastre-se</a></span>
                             </div>
                         </div>
-                    </form>:
-                    <Loading />
+                    </form>
             }
         </section>
     )

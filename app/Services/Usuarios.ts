@@ -1,5 +1,10 @@
-import { TypeUsuarios } from "../types/typeUsuarios";
 import { ResErro } from "../types/typeResErro";
+import logger from "../utils/logger";
+
+type Teste = {
+    'status' : number,
+    userID? : number 
+}
 
 export default class Usuarios {
 
@@ -26,12 +31,12 @@ export default class Usuarios {
             return Response.status
 
         } catch (error:unknown) {
-            console.error(error)
+            logger.error({err: error});
             return 0;
         }
     }
 
-    static async Login(pEmail:string, pSenha:string): Promise<number>{
+    static async Login(pEmail:string, pSenha:string): Promise<Teste>{
         try {
             const Response = await fetch(
 
@@ -45,11 +50,11 @@ export default class Usuarios {
                 }
             );
 
-            return Response.status
+            return {'status': Response.status, userID : await Response.json().catch((data)=>{return data.Id_Usuario})}
             
         } catch (error:unknown) {
-            console.error(error);
-            return 0;
+            logger.error({err : error, pEmail});
+            return {'status': 0};
         }
     }
 
@@ -101,19 +106,22 @@ export default class Usuarios {
             return Response.status;
 
         } catch (error) {
-            console.log(error);
+            logger.error({err: error});
             return 0;
         }
     }
 
-    static async AtivaUsuario (pToken: string) : Promise<boolean | string> {
+    static async AtivaUsuario (userID: number) : Promise<number> {
         try {
-            const Response = fetch(
-                'http://localhost:3001/Usuarios/AtivarUsuario'
+            const Response = await fetch(
+                `http://localhost:3001/Usuarios/AtivarUsuario/:${userID}`
             );
-            return ``;
+
+            return Response.status;
+
         } catch (error) {
-            return `Erro ao Ativar Usuário`;
+            logger.error({err: error,})
+            return 0;
         }
     }
 }

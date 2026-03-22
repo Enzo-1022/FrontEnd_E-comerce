@@ -5,9 +5,12 @@ import "./UI/styles/globals.css"; // Importando o css global
 import Header from "./UI/components/Header/header"; //importando o componente Header
 
 import { lusitana } from "./UI/Fonts/font"; // Importando a fonte 
+
 import { ErroProvider } from "./UI/context/erroContext";
 
 import NotifyBox from "./UI/components/NotifyBox/NotifyBox";
+
+import Loading from "./UI/components/Loading/Loading";
 
 export const metadata: Metadata = { // Meta tags
   title: "Simas Turbo",
@@ -33,7 +36,7 @@ export default function RootLayout(
         <body className={lusitana.className}>
           <Header />
           <NotifyBox />
-          {children}
+          <Loading children={children}/>
         </body>
       </html>
     </ErroProvider>

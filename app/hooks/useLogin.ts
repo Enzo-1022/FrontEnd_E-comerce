@@ -2,16 +2,19 @@ import Usuarios from '../Services/Usuarios';
 import { useRouter } from "next/navigation";
 import { ErroContext } from "@/app/UI/context/erroContext";
 import { useContext } from "react";
+import { UserContext } from '../UI/context/userContext';
 
 export function useLogin() {
     const router = useRouter();
 
     const erroContext = useContext(ErroContext);
 
+    const userContext = useContext(UserContext);
+
     async function hookLogin(pEmail : string, pSenha : string) {
         erroContext?.setLoading(true);
         try {
-            const Response = await Usuarios.Login(pEmail, pSenha);
+            const Response = await Usuarios.Login(pEmail, pSenha).then((valor)=>{ return valor});
             
         
             if (pEmail == '' || pSenha == '') 
@@ -24,7 +27,7 @@ export function useLogin() {
                 return; 
             }
         
-            switch (Response) {
+            switch (Response.status) {
                 case 400:
                     erroContext?.setNotify(
                         {
@@ -45,7 +48,8 @@ export function useLogin() {
                     break;
                 
                 case 403:
-                    router.push('/') // Adicionar a url para a rota de ativação do usuário
+                    userContext?.setUserID(Response?.userID);
+                    router.push('/Usuario/AtivarUsuario') // Adicionar a url para a rota de ativação do usuário
                     break;
                 
                 case 404:

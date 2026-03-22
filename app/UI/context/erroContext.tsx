@@ -15,7 +15,7 @@ export const ErroProvider = (
     const [erro, setErro] = useState<string>('');
     const [url, setUrl] = useState<string>('')
     const [notify, setNotify] = useState<Object>({
-        Title: undefined,
+        Title: undefined,   
         Message : undefined
     })
     const [loading, setLoading] = useState<boolean>(false)
