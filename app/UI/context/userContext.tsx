@@ -5,14 +5,14 @@ import { createContext, useState } from "react";
 
 export const UserContext = createContext<UserState | undefined>(undefined)
 
-export const userProvide = (
+export const UserProvider = (
     {
         children
     } : {
         children : React.ReactNode
     }
 ) => {
-    const [userID, setUserID] = useState<number | undefined >(0);
+    const [userID, setUserID] = useState<number | undefined>();
 
     return (
         <UserContext.Provider value = {{userID, setUserID}}>

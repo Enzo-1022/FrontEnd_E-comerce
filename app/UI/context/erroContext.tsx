@@ -9,7 +9,7 @@ export const ErroProvider = (
     {
         children
     } : {
-        children: React.ReactNode
+        children : React.ReactNode
     }
 ) => {
     const [erro, setErro] = useState<string>('');

@@ -1,3 +1,4 @@
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { ResErro } from "../types/typeResErro";
 import logger from "../utils/logger";
 
@@ -50,7 +51,7 @@ export default class Usuarios {
                 }
             );
 
-            return {'status': Response.status, userID : await Response.json().catch((data)=>{return data.Id_Usuario})}
+            return {'status': Response.status, userID : await Response.json().then( (data) => { return data.IdUsuario })}
             
         } catch (error:unknown) {
             logger.error({err : error, pEmail});
@@ -87,7 +88,7 @@ export default class Usuarios {
         }
     }
 
-    static async DesativaPerfil (token : string) : Promise<number> {
+    static async DesativaPerfil (token : RequestCookie | undefined | string) : Promise<number> {
         try {
             const Response = await fetch(
                 'http://localhost:3001/Usuarios/DesativarPerfil',
@@ -98,7 +99,7 @@ export default class Usuarios {
                     headers : {
                         'Content-Type' : 'application/json', 
                         'authorization' : `Bearer ${token}`,
-                        'accept' : 'application/json'
+                        'accept' : 'application/json',
                     }
                 }
             )
@@ -114,7 +115,12 @@ export default class Usuarios {
     static async AtivaUsuario (userID: number) : Promise<number> {
         try {
             const Response = await fetch(
-                `http://localhost:3001/Usuarios/AtivarUsuario/:${userID}`
+                `http://localhost:3001/Usuarios/AtivarPerfil/${userID}`,
+                {
+                    method : 'PATCH',
+                    credentials : 'include',    
+                    mode: 'cors'
+                }
             );
 
             return Response.status;

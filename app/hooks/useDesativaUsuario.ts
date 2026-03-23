@@ -1,19 +1,19 @@
 import { useContext } from "react";
 import Usuarios from "../Services/Usuarios";
 import { ErroContext } from "@/app/UI/context/erroContext";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export function useDesativaPerfil() {
-
-    const erroContext = useContext(ErroContext);
-    const cookies = document.cookie;
-    const token = cookies.split('sessionToken=')[1];
     const router = useRouter();
-
-    erroContext?.setLoading(true);
-
+    const erroContext = useContext(ErroContext);
+    
     async function desativandoPerfil(){
         try {
+            erroContext?.setLoading(true);
+
+            const cookiestorage = document.cookie;
+            const token = cookiestorage.split('sessionToken=')[1];
+
             const Response = await Usuarios.DesativaPerfil(token);
 
             if (Response != 204) {
@@ -31,7 +31,6 @@ export function useDesativaPerfil() {
         } finally {
             erroContext?.setLoading(false);
         }
-       
     }
 
     return { desativandoPerfil }

@@ -4,5 +4,5 @@ export type TypeUsuarios = {
     pCpf : string,
     pEmail : string,
     pSenha : string,
-    pConfSenha : string
+    pConfSenha? : string
 }

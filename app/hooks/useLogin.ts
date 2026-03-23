@@ -28,6 +28,11 @@ export function useLogin() {
             }
         
             switch (Response.status) {
+
+                case 200:
+                    router.replace('/Usuarios/Perfil')
+                    break;
+
                 case 400:
                     erroContext?.setNotify(
                         {
@@ -49,7 +54,9 @@ export function useLogin() {
                 
                 case 403:
                     userContext?.setUserID(Response?.userID);
-                    router.push('/Usuario/AtivarUsuario') // Adicionar a url para a rota de ativação do usuário
+                    userContext?.setUserID(3);
+
+                    router.push('/Usuarios/AtivarUsuario') // Adicionar a url para a rota de ativação do usuário
                     break;
                 
                 case 404:

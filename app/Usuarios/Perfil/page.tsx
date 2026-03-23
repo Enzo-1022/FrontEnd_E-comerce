@@ -22,14 +22,12 @@ export default async function Perfil () {
 
         const BodyResponse =  await Response.json();
 
-        // return {Response, BodyResponse};
         return <>
+            {/* <h1>{BodyResponse?.Nome_Usuario}</h1> */}
             <BtnDesativarConta/>
         </>
 
     } catch (error) {
-        return {error};
-    }
-
-    
+        return <h1 color="white">Erro ao Buscar Usuário</h1>
+    }    
 }

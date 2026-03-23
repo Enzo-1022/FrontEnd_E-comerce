@@ -26,30 +26,28 @@ export function useCadastroUsuario() {
             erro?.setNotify({
                 Title : "Dados Invalidos!",
                 Messege : "Alguns dos inputs se encontram vazios"
-            })
+            });
 
-            erro?.setLoading(false)
+            erro?.setLoading(false);
+
             return;
         }
         
-        if (pSenha != pConfSenha) 
+        if (pSenha != pConfSenha)
         {
             erro?.setNotify({
                 Title : "Senha invalida",
                 Messege : "A senha informada está diferente da senha digitada ao confirmar senha!"
             })
-            erro?.setLoading(false)
+
+            erro?.setLoading(false);
 
             return;
         }
 
-        // const NovoUsuario = new Usuarios({pNome, pDtNascimento, pCpf, pEmail, pSenha, pConfSenha});
-        // const CadastroUser = await NovoUsuario.CadastroUsuario(); // Utilizando o Método de Cadastro do usuario
-        // const response = CadastroUser?.Response ; // Gaurdando a Response aqui
-        // const cadastro = CadastroUser?.BodyResponse; // Guardando o BodyResponse
-
         try {
             const Response = await Usuarios.CadastroUsuario(pNome, pEmail, pDtNascimento, pCpf, pSenha);
+
             switch (Response) {
                 case 201:
                     erro?.setNotify(
@@ -60,73 +58,44 @@ export function useCadastroUsuario() {
                     );
 
                     router.push('/Login');
-                    erro?.setLoading(false);
 
                     break;
                 
                 case 400: 
-                    throw new Error(`Má Requisição, tente novamente!`)
+                    erro?.setNotify(
+                        {
+                            Title: 'Dados Invalidos!',
+                            Messege: 'Revise os Dados Informados'
+                        }
+                    );
+
+                    break;
+
+                case 409: 
+                    erro?.setNotify(
+                        {
+                            Title: 'Ops...',
+                            Messege: 'Ja existe um usuário cadastrado com esse email'
+                        }
+                    );
+
+                    break;
                 
                 default:
                     throw new Error(`Erro ao Cadastrar Usuário, Tente Novamente Mais Tarde!`)
-            }
-            // if(CadastroUser?.error != undefined)
-            // {
-            //     throw new Error(String(CadastroUser?.error))
-            // }
-
-            // if(response?.status == 400) // erro na requisicao (dados invalidos)
-            // {
-            //     console.error(cadastro.Erro, response.status, response.statusText);
-            //     erro?.setNotify({
-            //         Title: 'Erro',
-            //         Messege: cadastro.Erro
-            //     });
-            //     erro?.setLoading(false)
-            //     return;
-            //     // Aqui para que eu possa renderizar o erro em um template posso criar um novo cookie com o erro e redirecionar para uma pagina de erro
-            // }
-            
-            // if (response?.status == 500) // erro no servidor
-            // {
-            //     erro?.setErro(`${cadastro.Erro}`)
-            //     erro?.setUrl(`/Cadastro`)
-            //     router.push('/Erro')
-            //     erro?.setLoading(false)
-            //     return;
-            // }
-            
-            // if (response?.status == 409) // conflito
-            // {
-            //     erro?.setNotify({
-            //         Title: 'Erro',
-            //         Messege: cadastro.Erro
-            //     });
-            //     erro?.setLoading(false)
-            //     return;
-            // }
-            
-            // if (response?.status == 201) // criado com sucesso
-            // {
-            //     erro?.setNotify({
-            //         Title: 'Sucesso',
-            //         Messege: 'Cadastro Bem Sucedido'
-            //     });
-            //     router.push('/Login');
-            //     erro?.setLoading(false)
-
-            //     return;
-            // }
-
-            // throw new Error("undefined error");
+            }   
 
         } catch (error) {
+
             erro?.setErro(`${error}`);
             erro?.setUrl(`/Cadastro`);
             router.push('/Erro');
-            erro?.setLoading(false)
+
+        } finally {
+            erro?.setLoading(false);
         }
     }
 
-    return { cadastroUsuario }
+    return { cadastroUsuario };
+
 }
