@@ -13,6 +13,7 @@ export function useLogin() {
 
     async function hookLogin(pEmail : string, pSenha : string) {
         erroContext?.setLoading(true);
+        
         try {
             const Response = await Usuarios.Login(pEmail, pSenha).then((valor)=>{ return valor});
             
@@ -54,7 +55,7 @@ export function useLogin() {
                 
                 case 403:
                     userContext?.setUserID(Response?.userID);
-                    userContext?.setUserID(3);
+                    userContext?.setUserID(3);// não lembro o pq disso investigar depois provavelmente foi para contornar um erro
 
                     router.push('/Usuarios/AtivarUsuario') // Adicionar a url para a rota de ativação do usuário
                     break;
