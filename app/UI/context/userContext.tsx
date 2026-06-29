@@ -13,9 +13,10 @@ export const UserProvider = (
     }
 ) => {
     const [userID, setUserID] = useState<number | undefined>();
+    const [acessToken, setAcessToken] = useState<string>('');
 
     return (
-        <UserContext.Provider value = {{userID, setUserID}}>
+        <UserContext.Provider value = {{userID, setUserID, acessToken, setAcessToken}}>
             {children}
         </UserContext.Provider>
     )

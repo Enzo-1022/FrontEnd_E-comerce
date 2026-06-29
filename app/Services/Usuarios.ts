@@ -1,10 +1,12 @@
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { ResErro } from "../types/typeResErro";
 import logger from "../utils/logger";
+import { json } from "stream/consumers";
 
 type Teste = {
     'status' : number,
-    userID? : number 
+    userID? : number ,
+    acessToken : string,
 }
 
 export default class Usuarios {
@@ -51,11 +53,14 @@ export default class Usuarios {
                 }
             );
 
-            return {'status': Response.status, userID : await Response.json().then( (data) => { return data.IdUsuario })}
+            const BodyResponse = await Response.json()
+
+            return {'status': Response.status, userID : BodyResponse?.IdUsuario, acessToken : BodyResponse?.AcessToken};
             
         } catch (error:unknown) {
-            logger.error({err : error, pEmail});
-            return {'status': 0};
+            // logger.error({err : error, pEmail});
+            console.error(error)
+            return {'status': 0, acessToken: ''};
         }
     }
 

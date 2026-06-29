@@ -31,6 +31,7 @@ export function useLogin() {
             switch (Response.status) {
 
                 case 200:
+                    userContext?.setAcessToken(Response?.acessToken);
                     router.replace('/Usuarios/Perfil')
                     break;
 
