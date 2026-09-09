@@ -7,31 +7,34 @@ import { UserContext } from '../UI/context/userContext';
 export function useLogin() {
     const router = useRouter();
 
-    const erroContext = useContext(ErroContext);
-
     const userContext = useContext(UserContext);
+
+    const erroContext = useContext(ErroContext);
 
     async function hookLogin(pEmail : string, pSenha : string) {
         erroContext?.setLoading(true);
         
         try {
-            const Response = await Usuarios.Login(pEmail, pSenha).then((valor)=>{ return valor});
-            
         
             if (pEmail == '' || pSenha == '') 
             {
-                erroContext?.setNotify({
-                    Title : "Dados Invalidos!",
-                    Messege : "Inputs vazios!"
-                });
+                erroContext?.setNotify(
+                    {
+                        Title : "Dados Invalidos!",
+                        Messege : "Inputs vazios!"
+                    }
+                );
         
                 return; 
             }
+
+            const Response = await Usuarios.Login(pEmail, pSenha).then((valor)=>{ return valor});
         
             switch (Response.status) {
 
                 case 200:
-                    userContext?.setAcessToken(Response?.acessToken);
+                    userContext?.setAcessToken(Response.acessToken);
+                    
                     router.replace('/Usuarios/Perfil')
                     break;
 

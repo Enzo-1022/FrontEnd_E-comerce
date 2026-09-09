@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import { UserState } from "@/app/types/typeUsuerState";
 import { createContext, useState } from "react";
