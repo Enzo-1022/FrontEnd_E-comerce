@@ -4,11 +4,11 @@ import style from '@/app/UI/styles/login.module.css';
 
 import React, { useContext } from 'react';
 
-import BtnCadastro from '@/app/UI/components/BtnCadastro/btnCadastro';
+import BtnCadastro from '@/features/Cadastro/components/BtnCadastro/btnCadastro';
 
-import Loading from '../UI/components/Loading/Loading';
+import Loading from '../../components/Loading/Loading';
 
-import { ErroContext } from '../UI/context/erroContext';
+import { ErroContext } from '../../context/ErroContext/erroContext';
 
 export default function Cadastro() {
 

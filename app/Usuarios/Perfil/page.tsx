@@ -1,5 +1,5 @@
 'use client'
-import BtnDesativarConta from "@/app/UI/components/BtnDesativarConta/btnDesativarConta";
+import BtnDesativarConta from "@/features/Usuarios/DesativarUsuario/components/BtnDesativarConta/btnDesativarConta";
 
 import { usePerfilUsuario } from "@/app/hooks/usePerfilUsuario";
 
