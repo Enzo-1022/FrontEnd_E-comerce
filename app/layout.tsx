@@ -1,17 +1,18 @@
 import type { Metadata } from "next"; // Inportando as meta tags para podermos usarmos
 
-import "../components/UI/styles/globals.css"; // Importando o css global
+import "@/app/globals.css"; // Importando o css global
 
-import Header from "../components/Header/header"; //importando o componente Header
+import Header from "@/components/Header/header"; //importando o componente Header
 
-import { lusitana } from "../components/UI/Fonts/font"; // Importando a fonte 
+import { lusitana } from "@/components/UI/Fonts/font"; // Importando a fonte 
 
-import { ErroProvider } from "../context/ErroContext/erroContext";
+import { ErroProvider } from "@/context/ErroContext/erroContext";
 
-import NotifyBox from "../components/NotifyBox/NotifyBox";
+import NotifyBox from "@/components/NotifyBox/NotifyBox";
 
-import Loading from "../components/Loading/Loading";
-import { UserProvider } from "../context/UserContext/userContext";
+import Loading from "@/components/Loading/Loading";
+
+import { UserProvider } from "@/context/UserContext/userContext";
 
 export const metadata: Metadata = { // Meta tags
   title: "Simas Turbo",

@@ -1,6 +1,6 @@
 'use client';
 
-import BtnCadastroProdutos from "@/app/UI/components/BtnCadastroProdutos/BtnCadastroProdutos";
+import BtnCadastroProdutos from "@/features/Administrador/CadastroProduto/components/BtnCadastroProdutos/BtnCadastroProdutos";
 import React from "react";
 import style from '@/app/UI/Styles/login.module.css';
 

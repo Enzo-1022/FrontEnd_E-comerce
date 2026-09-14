@@ -1,8 +1,8 @@
-import Usuarios from '../Services/Usuarios';
+import Usuarios from '@/features/Usuarios/Services/Usuarios';
 import { useRouter } from "next/navigation";
 import { ErroContext } from "@/context/ErroContext/erroContext";
 import { useContext } from "react";
-import { UserContext } from '../UI/context/userContext';
+import { UserContext } from '@/context/UserContext/userContext';
 
 export function useLogin() {
     const router = useRouter();

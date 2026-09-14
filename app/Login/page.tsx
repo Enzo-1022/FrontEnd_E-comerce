@@ -1,8 +1,8 @@
 'use client';
 
-import style from '@/app/UI/Styles/login.module.css';
+import style from '@/components/UI/Styles/login.module.css';
 import React from 'react';
-import BtnLogin from '../../features/Login/components/BtnLogin/btnLogin';
+import BtnLogin from '@/features/Login/components/BtnLogin/btnLogin';
 
 export default function Login () {
     var [email1, setEmail] = React.useState('');

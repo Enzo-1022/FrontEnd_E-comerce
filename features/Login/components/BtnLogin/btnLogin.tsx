@@ -1,8 +1,8 @@
 'use client'
 
-import style from "@/app/UI/Styles/login.module.css";
-import { Logins } from "@/features/Login/types/typeLogins";
-import { useLogin } from "@/app/hooks/useLogin";
+import style from "@/components/UI/Styles/login.module.css";
+import { Logins } from "@/features/Login/types/Logins.type";
+import { useLogin } from "@/features/Login/hooks/useLogin";
 
 export default function BtnLogin ({pEmail, pSenha} : Logins) {
 

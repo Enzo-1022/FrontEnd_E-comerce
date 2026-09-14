@@ -1,7 +1,7 @@
 'use client';
 
-import style from '@/app/UI/Styles/login.module.css';
-import { TypeUsuarios } from '@/features/Usuarios/types/typeUsuarios';
+import style from '@/components/UI/Styles/login.module.css';
+import { TypeUsuarios } from '@/features/Usuarios/types/Usuarios.type';
 import { useCadastroUsuario } from '@/features/Cadastro/hooks/useCadastroUsuario';
 
 

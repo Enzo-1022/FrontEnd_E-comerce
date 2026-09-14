@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { Produtos } from '@/types/typeProdutos';
+import { Produtos } from '@/types/Produtos.type';
 
 export default async function CatalogoSecao () {
     try {

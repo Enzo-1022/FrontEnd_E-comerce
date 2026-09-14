@@ -1,10 +1,17 @@
-'use client'
-import style from '@/app/UI/Styles/loading.module.css';
+'use client';
+import style from '@/components/UI/Styles/loading.module.css';
 
-import { ErroContext } from '../../context/ErroContext/erroContext';
+import { ErroContext } from '@/context/ErroContext/erroContext';
 import { useContext } from 'react';
 
-export default function Loading({children}: { children : React.ReactNode}) {
+export default function Loading(
+    {
+        children
+    }: 
+    { 
+        children : React.ReactNode 
+    }
+) {
 
     const erroContext = useContext(ErroContext);
 

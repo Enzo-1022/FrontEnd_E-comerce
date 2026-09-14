@@ -1,4 +1,4 @@
-import BtnAtivarUsuario from "@/app/UI/components/BtnAtivarUsuario/BtnAtivarUsuario";
+import BtnAtivarUsuario from "@/features/Usuarios/AtivarUsuario/components/BtnAtivarUsuario/BtnAtivarUsuario";
 
 export default function AtivarUsuario() {
     return (

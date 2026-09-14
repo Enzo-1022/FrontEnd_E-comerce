@@ -1,7 +1,7 @@
 'use client'
 import BtnDesativarConta from "@/features/Usuarios/DesativarUsuario/components/BtnDesativarConta/btnDesativarConta";
 
-import { usePerfilUsuario } from "@/app/hooks/usePerfilUsuario";
+import { usePerfilUsuario } from "@/features/Usuarios/Perfil/hooks/usePerfilUsuario";
 
 export default function Perfil () {
 

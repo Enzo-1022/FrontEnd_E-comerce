@@ -1,6 +1,6 @@
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
-import { ResErro } from "../types/typeResErro";
-import logger from "../utils/logger";
+import { ResErro } from '@/features/Usuarios/Services/types/typeResErro'
+import logger from "@/utils/logger";
 import { json } from "stream/consumers";
 
 type Teste = {

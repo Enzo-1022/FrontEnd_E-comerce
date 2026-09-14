@@ -1,6 +1,6 @@
 'use client'
 
-import style from '@/app/UI/Styles/notify.module.css'
+import style from '@/components/UI/Styles/notify.module.css'
 import { ErroContext } from '@/context/ErroContext/erroContext';
 import { useContext } from 'react';
 

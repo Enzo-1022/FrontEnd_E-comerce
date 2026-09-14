@@ -2,21 +2,23 @@ import { useRouter } from 'next/navigation';
 
 import { ErroContext } from '@/context/ErroContext/erroContext';
 import { useContext } from 'react';
-import { TypeUsuarios } from '@/features/Usuarios/types/typeUsuarios';
-import Usuarios from '@/app/Services/Usuarios'
+import { TypeUsuarios } from '@/features/Usuarios/types/Usuarios.type';
+import Usuarios from '@/features/Usuarios/Services/Usuarios'
 
 export function useCadastroUsuario() {
     const erro = useContext(ErroContext);
     const router = useRouter();
 
-    async function cadastroUsuario({ 
-        pNome, 
-        pDtNascimento, 
-        pCpf, 
-        pEmail, 
-        pSenha, 
-        pConfSenha
-    } : TypeUsuarios ) 
+    async function cadastroUsuario (
+        { 
+            pNome, 
+            pDtNascimento, 
+            pCpf, 
+            pEmail, 
+            pSenha, 
+            pConfSenha
+        } : TypeUsuarios 
+    ) 
     {
 
         erro?.setLoading(true)

@@ -2,8 +2,8 @@
 
 import style from '@/app/UI/Styles/login.module.css';
 import { useContext } from 'react';
-import { ErroContext } from '../../context/erroContext';
-import { Produtos } from '@/features/Administrador/CadastroProduto/types/typeCadastroProdutos';
+import { ErroContext } from '@/context/ErroContext/erroContext';
+import { Produtos } from '@/features/Administrador/CadastroProduto/types/CadastroProdutos.type';
 import { useRouter } from 'next/navigation';
 
 async function cadastroProdutos({ pNome, pQuantidade, pDescricao, pPreco } : Produtos) {
