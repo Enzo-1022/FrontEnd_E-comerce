@@ -5,9 +5,9 @@ import React from 'react';
 import BtnLogin from '@/features/Login/components/BtnLogin/btnLogin';
 
 export default function Login () {
-    var [email1, setEmail] = React.useState('');
+    const [email1, setEmail] = React.useState('');
 
-    var [senha1, setSenha] = React.useState('');
+    const [senha1, setSenha] = React.useState('');
 
     return(
         <section>

@@ -2,22 +2,18 @@
 
 import style from '@/components/UI/Styles/login.module.css';
 
-import React, { useContext } from 'react';
+import React from 'react';
 
 import BtnCadastro from '@/features/Cadastro/components/BtnCadastro/btnCadastro';
 
-import { ErroContext } from '@/context/ErroContext/erroContext';
-
 export default function Cadastro() {
 
-    var [ nome, setNome ] = React.useState('');
-    var [ dataNascimento, setDataNascimento ] = React.useState('');
-    var [ cpf, setCpf ] = React.useState('');
-    var [ email, setEmail ] = React.useState('');
-    var [ senha, setSenha ] = React.useState('');
-    var [ confirmarSenha, setConfirmarSenha ] = React.useState('');
-
-    const context = useContext(ErroContext)
+    const [ nome, setNome ] = React.useState('');
+    const [ dataNascimento, setDataNascimento ] = React.useState('');
+    const [ cpf, setCpf ] = React.useState('');
+    const [ email, setEmail ] = React.useState('');
+    const [ senha, setSenha ] = React.useState('');
+    const [ confirmarSenha, setConfirmarSenha ] = React.useState('');
 
     return(
         <section className={style.section}>

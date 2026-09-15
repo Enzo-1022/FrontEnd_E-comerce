@@ -1,7 +1,6 @@
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { ResErro } from '@/features/Usuarios/Services/types/typeResErro'
 import logger from "@/utils/logger";
-import { json } from "stream/consumers";
 
 type Teste = {
     'status' : number,
@@ -131,7 +130,7 @@ export default class Usuarios {
             return Response.status;
 
         } catch (error) {
-            logger.error({err: error,})
+            logger.error({err: error})
             return 0;
         }
     }

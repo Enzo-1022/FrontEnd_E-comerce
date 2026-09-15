@@ -2,15 +2,15 @@ import type { Metadata } from "next"; // Inportando as meta tags para podermos u
 
 import "@/app/globals.css"; // Importando o css global
 
-import Header from "@/components/Header/header"; //importando o componente Header
+import Header from "@/components/layout/Header/header"; //importando o componente Header
 
 import { lusitana } from "@/components/UI/Fonts/font"; // Importando a fonte 
 
 import { ErroProvider } from "@/context/ErroContext/erroContext";
 
-import NotifyBox from "@/components/NotifyBox/NotifyBox";
+import NotifyBox from "@/components/layout/NotifyBox/NotifyBox";
 
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/components/layout/Loading/Loading";
 
 import { UserProvider } from "@/context/UserContext/userContext";
 

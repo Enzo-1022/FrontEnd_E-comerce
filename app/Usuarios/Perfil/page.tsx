@@ -14,6 +14,7 @@ export default function Perfil () {
         </> 
         
     } catch (error) {
+        console.log(error)
         return <>
             <h1>Deu RED</h1>
         </>

@@ -3,15 +3,41 @@ Esse é um projeto frontend que estou fazendo juntamente com o aprendizado do ne
 O objetvo do projeto é ser o frontend de um ecomerce de peças automotivas.
 A ideia é ser bem simples, com operações basicas de inserção, atualização, visualisação e exclusão de produtos, sistema de login e cadastro para os usuários, painel para os administradores, sistema de carrinho + simulação de compra e integração com o backend que também está sendo desenvolvido por mim.
 
-## FERAMENTAS
+## FERRAMENTAS
 ```text
-    NextJS;
-    React;
-    TypeScript
+NextJS
+React
+TypeScript
+```
+
+## PRÉ REQUISITOS E AMBIENTES
+#### NodeJS >= 22.19.0
+#### NPM >= 10.9.3
+
+## PASSO A PASSO PARA A EXECUÇÂO DO PROJETO 
+### 1. Clonar o Repositório 
+```text
+git clone https://github.com/Enzo-1022/FrontEnd_E-comerce
+```
+
+### 2. Entrar na Pasta do Projeto
+```text
+cd FrontEnd_E-comerce
+```
+
+### 3. Instalar as Dependencias 
+```text
+npm install
 ```
 
 ## Comandos de Script Disponiveis
-npm run dev     # Inicia a aplicação em ambiente de desenvolvimento
+```text
+npm run dev             # Inicia a aplicação em ambiente de desenvolvimento
+npm run dev_https       # Inicia a aplicação em ambiente de desenvolvimento mas dessa vez com o uso do protocolo https
+npm run lint            # Executa a Verificação do ESLint para identificar erros de sintaxe e padrão
+npm run build           # Compila a aplicação para produção
+npm run start           # Inicia a aplicação em modo de produção após o build
+```
 
 ## Estrutura de Pastas do Projeto 
 
@@ -34,3 +60,4 @@ src/
 ├── services/             # Clientes de API e instâncias globais
 ├── types/                # Entidades e tipos TypeScript globais
 └── utils/                # Funções utilitárias puras (formatações, validações)
+```

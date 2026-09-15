@@ -6,10 +6,10 @@ import style from '@/app/UI/Styles/login.module.css';
 
 export default function CadastroProdutos() {
 
-    let [ nomeProduto, setNomeProduto ] = React.useState('');
-    let [ quantidadeProduto, setQuantidadeProduto ] = React.useState('');
-    let [ descicaoProduto, setDescricaoProduto ] = React.useState('');
-    let [ precoProduto, setPrecoProduto ] = React.useState('');
+    const [ nomeProduto, setNomeProduto ] = React.useState('');
+    const [ quantidadeProduto, setQuantidadeProduto ] = React.useState('');
+    const [ descicaoProduto, setDescricaoProduto ] = React.useState('');
+    const [ precoProduto, setPrecoProduto ] = React.useState('');
 
     return(
         <section>
