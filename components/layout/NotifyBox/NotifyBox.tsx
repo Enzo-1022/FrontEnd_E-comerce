@@ -1,0 +1,28 @@
+'use client'
+
+import style from '@/components/UI/Styles/notify.module.css'
+import { ErroContext } from '@/context/ErroContext/erroContext';
+import { useContext } from 'react';
+
+export default function NotifyBox() {
+    const erro = useContext(ErroContext);
+
+    return(
+        <div className={ erro?.notify.Title != undefined? style.boxNotify : style.boxDisable } >
+            <div className={style.boxTitle}>
+                <div className={style.imgETitle}>
+                    <img src='/imgs/warning.png' alt="warning" className={style.img}/>
+                    <h5 className={style.marginZero}>{erro?.notify.Title}</h5>
+                </div>
+                <button className={style.button} onClick={
+                    () => {
+                        erro?.setNotify({Title : undefined, Messege: undefined});
+                    }
+                }> X </button>
+            </div>
+            
+            <p className={style.marginZero}>{erro?.notify.Messege}</p>
+
+        </div>
+    );
+}

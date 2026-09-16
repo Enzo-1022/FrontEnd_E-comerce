@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## VISÃO GERAL DO PROJETO
+Esse é um projeto frontend que estou fazendo juntamente com o aprendizado do nextjs com react e typescript.
+O objetvo do projeto é ser o frontend de um ecomerce de peças automotivas.
+A ideia é ser bem simples, com operações basicas de inserção, atualização, visualisação e exclusão de produtos, sistema de login e cadastro para os usuários, painel para os administradores, sistema de carrinho + simulação de compra e integração com o backend que também está sendo desenvolvido por mim.
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## FERRAMENTAS
+```text
+NextJS
+React
+TypeScript
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## PRÉ REQUISITOS E AMBIENTES
+#### NodeJS >= 22.19.0
+#### NPM >= 10.9.3
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## PASSO A PASSO PARA A EXECUÇÂO DO PROJETO 
+### 1. Clonar o Repositório 
+```text
+git clone https://github.com/Enzo-1022/FrontEnd_E-comerce
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2. Entrar na Pasta do Projeto
+```text
+cd FrontEnd_E-comerce
+```
 
-## Learn More
+### 3. Instalar as Dependencias 
+```text
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Comandos de Script Disponiveis
+```text
+npm run dev             # Inicia a aplicação em ambiente de desenvolvimento
+npm run dev_https       # Inicia a aplicação em ambiente de desenvolvimento mas dessa vez com o uso do protocolo https
+npm run lint            # Executa a Verificação do ESLint para identificar erros de sintaxe e padrão
+npm run build           # Compila a aplicação para produção
+npm run start           # Inicia a aplicação em modo de produção após o build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Estrutura de Pastas do Projeto 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+A aplicação segue uma arquitetura baseada em **Features (Dominios)** e **Camadas de Responsabilidades**, separando toda a lógica da aplicação do roteamento do Next.js
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```text
+src/
+├── app/                  # Roteamento e layouts (App Router do Next.js)
+├── components/           # Componentes visuais globais (Design System/UI Pura)
+│   ├── ui/               # Botões, inputs, modais (agnósticos de regra de negócio)
+│   └── layout/           # Header, Sidebar, Footer
+├── contexts/             # Providers e gerenciamento de estado global
+├── features/             # Módulos da aplicação organizados por funcionalidade
+│   └── usuarios/         # Exemplo de feature/domínio
+│       ├── components/   # Componentes exclusivos do domínio
+│       ├── hooks/        # Hooks locais do domínio
+│       ├── services/     # Chamadas de API/serviços do domínio
+│       └── types/        # Interfaces e tipos específicos do domínio
+├── hooks/                # Hooks utilitários globais
+├── services/             # Clientes de API e instâncias globais
+├── types/                # Entidades e tipos TypeScript globais
+└── utils/                # Funções utilitárias puras (formatações, validações)
+```

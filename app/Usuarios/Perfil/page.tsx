@@ -1,7 +1,7 @@
 'use client'
-import BtnDesativarConta from "@/app/UI/components/BtnDesativarConta/btnDesativarConta";
+import BtnDesativarConta from "@/features/Usuarios/DesativarUsuario/components/BtnDesativarConta/btnDesativarConta";
 
-import { usePerfilUsuario } from "@/app/hooks/usePerfilUsuario";
+import { usePerfilUsuario } from "@/features/Usuarios/Perfil/hooks/usePerfilUsuario";
 
 export default function Perfil () {
 
@@ -14,6 +14,7 @@ export default function Perfil () {
         </> 
         
     } catch (error) {
+        console.log(error)
         return <>
             <h1>Deu RED</h1>
         </>
