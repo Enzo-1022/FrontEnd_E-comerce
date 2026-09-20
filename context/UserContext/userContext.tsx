@@ -1,7 +1,7 @@
 'use client'
 
 import { UserState } from "@/context/UserContext/typeUserState";
-import { createContext, useState } from "react";
+import { createContext, useMemo, useState } from "react";
 
 export const UserContext = createContext<UserState | undefined>(undefined)
 
@@ -15,8 +15,15 @@ export const UserProvider = (
     const [userID, setUserID] = useState<number | undefined>();
     const [acessToken, setAcessToken] = useState<string>('');
 
+    const tt = useMemo(() => ({
+        userID,
+        acessToken,
+        setAcessToken,
+        setUserID
+    }), [userID, acessToken])
+
     return (
-        <UserContext.Provider value = {{userID, setUserID, acessToken, setAcessToken}}>
+        <UserContext.Provider value = {tt}>
             {children}
         </UserContext.Provider>
     )

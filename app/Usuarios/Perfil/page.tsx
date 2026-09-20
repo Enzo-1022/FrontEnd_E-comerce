@@ -8,8 +8,8 @@ export default function Perfil () {
     const { dados } = usePerfilUsuario();
 
     try {
-        console.log(dados)
         return <>
+            {console.log(dados)}
             <BtnDesativarConta/>
         </> 
         

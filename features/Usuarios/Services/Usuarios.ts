@@ -1,6 +1,7 @@
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
-import { ResErro } from '@/features/Usuarios/Services/types/typeResErro'
+// import { ResErro } from '@/features/Usuarios/Services/types/typeResErro'
 import logger from "@/utils/logger";
+import Usuario  from "@/features/Usuarios/interfaces/Usuario.interface"
 
 type Teste = {
     'status' : number,
@@ -63,7 +64,7 @@ export default class Usuarios {
         }
     }
 
-    static async BuscaUsuario (token:string) : Promise<Response | string>{
+    static async BuscaUsuario (token:string) : Promise<Usuario>{
         try {
             const Response = await fetch(
 
@@ -81,14 +82,16 @@ export default class Usuarios {
                 }
             );
 
+            const BodyResponse : Usuario = await Response.json()
+
             if(Response.status != 200) {
-                return Response.json().then( (data : ResErro) => { return data.Erro});
+                throw new Error("Erro ao Buscar Usuário", {'cause' : BodyResponse}) // Vai dar um erro lá na frente quando eu tentar usar a o BodyResponse pois a caso for um erro as propriedades são diferentes, mas vamos prosseguir
             }
 
-           return await Response.json();
+           return await Response.json().then( data => { return data.PerfilUsuario } );
 
         } catch (error) {
-            return `Erro ao Buscar Usuário`;
+            throw new Error("Erro ao Buscar Usuário");
         }
     }
 

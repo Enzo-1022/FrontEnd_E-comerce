@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Usuarios from "../Services/Usuarios";
+import Usuarios from "@/features/Usuarios/Services/Usuarios";
 import { ErroContext } from "@/context/ErroContext/erroContext";
 import { useRouter } from "next/navigation";
 

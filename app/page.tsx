@@ -1,5 +1,5 @@
 import Carrosel from "@/features/Index/components/Carrosel/carrosel";
-import NavBar from "@/components/NavBar/navbar";
+import NavBar from "@/components/layout/NavBar/navbar";
 import styles from "@/components/UI/styles/page.module.css";
 
 export default function Home() {
