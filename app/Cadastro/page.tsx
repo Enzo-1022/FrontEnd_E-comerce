@@ -4,7 +4,7 @@ import style from '@/components/UI/Styles/login.module.css';
 
 import React from 'react';
 
-import BtnCadastro from '@/features/Cadastro/components/BtnCadastro/btnCadastro';
+import BtnCadastro from '@/features/Cadastro/components/BtnCadastro/btnCadastro.component';
 
 export default function Cadastro() {
 

@@ -1,8 +1,8 @@
-import Usuarios from '@/features/Usuarios/Services/Usuarios';
+import Usuarios from '@/features/Usuarios/Services/Usuarios.service';
 import { useRouter } from "next/navigation";
-import { ErroContext } from "@/context/ErroContext/erroContext";
+import { ErroContext } from "@/context/ErroContext/erroContext.context";
 import { useContext } from "react";
-import { UserContext } from '@/context/UserContext/userContext';
+import { UserContext } from '@/context/UserContext/userContext.context';
 
 export function useLogin() {
     const router = useRouter();
@@ -12,8 +12,9 @@ export function useLogin() {
     const erroContext = useContext(ErroContext);
 
     async function hookLogin(pEmail : string, pSenha : string) {
+
         erroContext?.setLoading(true);
-        
+
         try {
         
             if (pEmail == '' || pSenha == '') 
@@ -33,9 +34,7 @@ export function useLogin() {
             switch (Response.status) {
 
                 case 200:
-                    userContext?.setAcessToken(Response.acessToken);
-                    
-                    router.replace('/Usuarios/Perfil')
+                    router.replace('/Usuarios/Perfil');
                     break;
 
                 case 400:

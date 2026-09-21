@@ -1,9 +1,9 @@
 import { useRouter } from 'next/navigation';
 
-import { ErroContext } from '@/context/ErroContext/erroContext';
+import { ErroContext } from '@/context/ErroContext/erroContext.context';
 import { useContext } from 'react';
 import { TypeUsuarios } from '@/features/Usuarios/types/Usuarios.type';
-import Usuarios from '@/features/Usuarios/Services/Usuarios'
+import Usuarios from '@/features/Usuarios/Services/Usuarios.service'
 
 export function useCadastroUsuario() {
     const erro = useContext(ErroContext);

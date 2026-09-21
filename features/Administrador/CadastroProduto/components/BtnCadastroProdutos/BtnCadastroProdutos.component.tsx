@@ -2,7 +2,7 @@
 
 import style from '@/app/UI/Styles/login.module.css';
 import { useContext } from 'react';
-import { ErroContext } from '@/context/ErroContext/erroContext';
+import { ErroContext } from '@/context/ErroContext/erroContext.context';
 import { Produtos } from '@/features/Administrador/CadastroProduto/types/CadastroProdutos.type';
 import { useRouter } from 'next/navigation';
 

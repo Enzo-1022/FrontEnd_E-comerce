@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import Usuarios from "../Services/Usuarios";
-import { UserContext } from "../UI/context/userContext";
+import Usuarios from "@/features/Usuarios/Services/Usuarios.service";
+import { UserContext } from "@/context/UserContext/userContext.context";
 import { useRouter } from "next/navigation";
-import { ErroContext } from "../UI/context/erroContext";
+import { ErroContext } from "@/context/ErroContext/erroContext.context";
 
 export function useAtivarUsuario() {
 

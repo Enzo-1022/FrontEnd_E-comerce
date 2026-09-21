@@ -1,6 +1,6 @@
 'use client'
 
-import { UserState } from "@/context/UserContext/typeUserState";
+import { UserState } from "@/context/UserContext/UserState.type";
 import { createContext, useMemo, useState } from "react";
 
 export const UserContext = createContext<UserState | undefined>(undefined)

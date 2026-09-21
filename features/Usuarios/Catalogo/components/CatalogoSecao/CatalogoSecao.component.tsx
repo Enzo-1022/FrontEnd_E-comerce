@@ -5,19 +5,18 @@ export default async function CatalogoSecao () {
     try {
         const cookieStore = await cookies();
 
-        var token = cookieStore.get('sessionToken'); // Pegando o conteudo do cookie sessioToken, que por sua vez é o token de sessão.
+        var cookieHeader = cookieStore.toString(); // Pegando o conteudo do cookie sessioToken, que por sua vez é o token de sessão.
 
         var response = await fetch( // Fazendo a requisição ao endpoint de catalogo(Pagina index do app)
-            'http://localhost:3001/Usuarios/Catalogo', // Url do endpoint
+            'http://localhost:3001/Produtos/Catalogo', // Url do endpoint
             
             { // Configurações da requisição.
                 mode : "cors", // Usando o método cors para segurança das requisições
-                method : 'get', // Método da Requisição
+                method : 'post', // Método da Requisição
                 credentials: 'include', // Credentials isso significa que permite o uso de cookies e localstorage, include significa que vai incluso na requisição?
+                body : new URLSearchParams({'Pagina' : '1'}), // Depois pensar na lógica para a paginação do lado do frontend
                 headers: { // Headers são os cabeçalhos da requisição
-                    'Content-Type': 'application/json', // Tipo de conteudo da requisição
-                    "authorization": `Bearer ${token?.value}`, // Cabeçalho para passarmos os tokens de autorização
-                    "accept" : 'application/json' // Conteudo que aceitamos como resposta 
+                    "Cookie" : cookieHeader,
                 } 
             }
         );

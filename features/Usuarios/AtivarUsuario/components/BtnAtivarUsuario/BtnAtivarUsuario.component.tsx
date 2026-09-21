@@ -1,6 +1,6 @@
 'use client';
 
-import {useAtivarUsuario} from "@/app/hooks/useAtivarUsario";
+import {useAtivarUsuario} from "@/features/Usuarios/AtivarUsuario/hooks/useAtivarUsario.hook";
 
 export default function BtnAtivarUsuario() {
 

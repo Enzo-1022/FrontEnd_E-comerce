@@ -2,7 +2,7 @@
 
 import style from "@/components/UI/Styles/login.module.css";
 import { Logins } from "@/features/Login/types/Logins.type";
-import { useLogin } from "@/features/Login/hooks/useLogin";
+import { useLogin } from "@/features/Login/hooks/useLogin.hook";
 
 export default function BtnLogin ({pEmail, pSenha} : Logins) {
 

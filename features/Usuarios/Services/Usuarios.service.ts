@@ -1,6 +1,6 @@
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 // import { ResErro } from '@/features/Usuarios/Services/types/typeResErro'
-import logger from "@/utils/logger";
+import logger from "@/utils/logger.util";
 import Usuario  from "@/features/Usuarios/interfaces/Usuario.interface"
 
 type Teste = {
@@ -64,7 +64,7 @@ export default class Usuarios {
         }
     }
 
-    static async BuscaUsuario (token:string) : Promise<Usuario>{
+    static async BuscaUsuario () : Promise<Usuario>{
         try {
             const Response = await fetch(
 
@@ -76,22 +76,62 @@ export default class Usuarios {
                     credentials: 'include',
                     headers: {
                         'Content-Type': 'application/json', // Tipo de conteudo da requisição
-                        "authorization": `Bearer ${token}`, // Cabeçalho para passarmos os tokens de autorização
                         "accept" : 'application/json' // Conteudo que aceitamos como resposta 
                     }
                 }
             );
 
-            const BodyResponse : Usuario = await Response.json()
+            const BodyResponse : Usuario = await Response.json().then(data => {return data.PerfilUsuario});
 
             if(Response.status != 200) {
-                throw new Error("Erro ao Buscar Usuário", {'cause' : BodyResponse}) // Vai dar um erro lá na frente quando eu tentar usar a o BodyResponse pois a caso for um erro as propriedades são diferentes, mas vamos prosseguir
+
+                if (Response.status != 401) {
+                    throw new Error("Erro ao Buscar Usuário", {'cause' : BodyResponse}); // Vai dar um erro lá na frente quando eu tentar usar a o BodyResponse pois a caso for um erro as propriedades são diferentes, mas vamos prosseguir
+                }
+                else{
+                    const res = await fetch(
+                        'http://localhost:3001/Authorization/AttAcessToken', 
+                        {
+                            mode:'cors',
+                            method: 'get',
+                            credentials: 'include'
+                        }
+                    );
+
+                    if (res.status == 204){
+                        const tt = await fetch(
+
+                            'http://localhost:3001/Usuarios/Perfil', 
+
+                            {
+                                mode:'cors',
+                                method: 'get',
+                                credentials: 'include',
+                                headers: {
+                                    'Content-Type': 'application/json', // Tipo de conteudo da requisição
+                                    "accept" : 'application/json' // Conteudo que aceitamos como resposta 
+                                }
+                            }
+                        );
+
+                        const ttt : Usuario = await tt.json().then(data => {return data.PerfilUsuario});;
+
+                        return ttt;
+                    }
+                    else {
+                        console.error(await res.json())
+                    }
+                }
             }
 
-           return await Response.json().then( data => { return data.PerfilUsuario } );
+            return BodyResponse
+
+        //    return await Response.json().then( data => { return data.PerfilUsuario } );
+            
 
         } catch (error) {
-            throw new Error("Erro ao Buscar Usuário");
+            console.error(error)
+            throw new Error("Erro ao Buscar Usuário", {'cause' : error});
         }
     }
 

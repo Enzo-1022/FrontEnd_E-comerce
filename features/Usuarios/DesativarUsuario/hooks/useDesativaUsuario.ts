@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import Usuarios from "@/features/Usuarios/Services/Usuarios";
-import { ErroContext } from "@/context/ErroContext/erroContext";
+import Usuarios from "@/features/Usuarios/Services/Usuarios.service";
+import { ErroContext } from "@/context/ErroContext/erroContext.context";
 import { useRouter } from "next/navigation";
 
 export function useDesativaPerfil() {

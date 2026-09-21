@@ -1,7 +1,7 @@
 'use client'
 
 import style from '@/components/UI/Styles/notify.module.css'
-import { ErroContext } from '@/context/ErroContext/erroContext';
+import { ErroContext } from '@/context/ErroContext/erroContext.context';
 import { useContext } from 'react';
 
 export default function NotifyBox() {

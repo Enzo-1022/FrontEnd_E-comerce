@@ -1,6 +1,6 @@
 'use client'
 import { useContext } from "react";
-import { ErroContext } from "@/context/ErroContext/erroContext";
+import { ErroContext } from "@/context/ErroContext/erroContext.context";
 import style from "@/components/UI/styles/erro.module.css";
 
 export default function Erro()

@@ -2,7 +2,7 @@
 
 import style from '@/components/UI/Styles/login.module.css';
 import React from 'react';
-import BtnLogin from '@/features/Login/components/BtnLogin/btnLogin';
+import BtnLogin from '@/features/Login/components/BtnLogin/btnLogin.component';
 
 export default function Login () {
     const [email1, setEmail] = React.useState('');

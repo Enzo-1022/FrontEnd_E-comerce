@@ -1,7 +1,7 @@
 'use client'
 
-import { ErroState } from '@/context/ErroContext/typeErroState';
-import { createContext, useState } from 'react';
+import { ErroState } from '@/context/ErroContext/ErroState.type';
+import { createContext, useMemo, useState } from 'react';
 
 export const ErroContext = createContext<ErroState | undefined>(undefined);
 
@@ -20,8 +20,12 @@ export const ErroProvider = (
     })
     const [loading, setLoading] = useState<boolean>(false)
 
+    const memorizeData = useMemo( () => (
+        {erro, setErro, url, setUrl, notify, setNotify, loading, setLoading}
+    ), [erro, url, notify, loading]);
+    
     return(
-        <ErroContext.Provider value={{erro, setErro, url, setUrl, notify, setNotify, loading, setLoading}}>
+        <ErroContext.Provider value={memorizeData}>
             {children}
         </ErroContext.Provider>
     )
