@@ -12,7 +12,7 @@ import NotifyBox from "@/components/layout/NotifyBox/NotifyBox.component";
 
 import Loading from "@/components/layout/Loading/Loading.component";
 
-import { UserProvider } from "@/context/UserContext/userContext.context";
+// import { UserProvider } from "@/context/UserContext/userContext.context";
 
 export const metadata: Metadata = { // Meta tags
   title: "Simas Turbo",

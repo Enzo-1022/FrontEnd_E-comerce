@@ -5,37 +5,21 @@ import { useRouter } from "next/navigation";
 import { ErroContext } from "@/context/ErroContext/erroContext.context";
 
 export function usePerfilUsuario(){
-    const [ dados, setDados ] = useState<Usuario | null>(null);
-
-    // const gg = useRef(false)
-
-
-    // async function alocandoDados() {
-    //     if (!gg.current) {
-    //         const usuario = await Usuarios.BuscaUsuario()
-    //         setDados(usuario);
-
-    //         gg.current = true;
-    //     }
-
-    //     return
-    // }
-
-    //  useEffect(() => {
-    //     alocandoDados()
-    //  }, []);
+    const [ dados, setDados ] = useState<Usuario>(
+        {
+            Cpf : "", 
+            Data_Nascimento : "", 
+            Id_Usuario: 0, 
+            Nome : ""
+        }
+    );
 
     const router = useRouter();
 
     const erroContext = useContext(ErroContext);
 
-    const gg = useRef(false)
-
     async function buscandoUsuario() {
-
-        if (gg.current) return;
         try {
-            gg.current = true;
 
             erroContext?.setLoading(true);
 
@@ -50,8 +34,12 @@ export function usePerfilUsuario(){
             erroContext?.setUrl("/Login");
             router.replace("/Erro");
 
+            return;
+
         } finally {
             erroContext?.setLoading(false);
+
+            return;
         }
     }
 

@@ -2,7 +2,7 @@
 
 import BtnCadastroProdutos from "@/features/Administrador/CadastroProduto/components/BtnCadastroProdutos/BtnCadastroProdutos.component";
 import React from "react";
-import style from '@/app/UI/Styles/login.module.css';
+import style from '@/components/UI/Styles/login.module.css';
 
 export default function CadastroProdutos() {
 
@@ -13,7 +13,7 @@ export default function CadastroProdutos() {
 
     return(
         <section>
-            <form action="" className={style.formularioCadastro}>
+            <form method="get" action="" className={style.formularioCadastro} onSubmit={(e) => { e.preventDefault() }}>
 
                 <div className={style.boxTitulo}>
                     <h2 className={''}>Cadastro de Produtos</h2>
@@ -38,7 +38,7 @@ export default function CadastroProdutos() {
 
                     <div className={style.boxForm}>
                         <label htmlFor="">Descrição Do Produto:</label>
-                        <textarea className={style.input} name="" id="" placeholder="Descrição" onChange={ (e) => { setDescricaoProduto(e.target.value) } }></textarea>
+                        <textarea className={style.input} name="" id="" placeholder="Descrição" onChange={ (e) => { setDescricaoProduto(e.target.value) } } maxLength={255}></textarea>
                     </div>
 
                     <div className={style.boxBtns}>

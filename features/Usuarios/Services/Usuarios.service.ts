@@ -124,10 +124,7 @@ export default class Usuarios {
                 }
             }
 
-            return BodyResponse
-
-        //    return await Response.json().then( data => { return data.PerfilUsuario } );
-            
+            return BodyResponse;            
 
         } catch (error) {
             console.error(error)
@@ -135,7 +132,7 @@ export default class Usuarios {
         }
     }
 
-    static async DesativaPerfil (token : RequestCookie | undefined | string) : Promise<number> {
+    static async DesativaPerfil () : Promise<number> {
         try {
             const Response = await fetch(
                 'http://localhost:3001/Usuarios/DesativarPerfil',
@@ -145,8 +142,7 @@ export default class Usuarios {
                     credentials : 'include',
                     headers : {
                         'Content-Type' : 'application/json', 
-                        'authorization' : `Bearer ${token}`,
-                        'accept' : 'application/json',
+                        'accept' : 'application/json'
                     }
                 }
             )

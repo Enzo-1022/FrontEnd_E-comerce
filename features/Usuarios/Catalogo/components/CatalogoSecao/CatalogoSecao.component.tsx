@@ -23,9 +23,9 @@ export default async function CatalogoSecao () {
         
         if (response.status == 200) // Se o status da resposta for 200 ok
         {
-            var catalogo = await response.json(); // Convertendo a requisição para Json, basicamente extraindo o conteudo do body da requisiçã
+            const catalogo = await response.json(); // Convertendo a requisição para Json, basicamente extraindo o conteudo do body da requisiçã
 
-            var produtos = catalogo.Produtos; // Pegando a propriedade produtos do Body json da requisição
+            const produtos = catalogo.produtos; // Pegando a propriedade produtos do Body json da requisição
             
             return(
                 <section>
