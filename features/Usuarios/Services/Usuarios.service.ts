@@ -1,12 +1,10 @@
-import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
-// import { ResErro } from '@/features/Usuarios/Services/types/typeResErro'
 import logger from "@/utils/logger.util";
 import Usuario  from "@/features/Usuarios/interfaces/Usuario.interface"
+import Auth from "@/services/auth.service";
 
-type Teste = {
-    'status' : number,
-    userID? : number ,
-    acessToken : string,
+type ResLogin = {
+    status : number,
+    userID : number
 }
 
 export default class Usuarios {
@@ -39,7 +37,7 @@ export default class Usuarios {
         }
     }
 
-    static async Login(pEmail:string, pSenha:string): Promise<Teste>{
+    static async Login(pEmail:string, pSenha:string): Promise<ResLogin>{
         try {
             const Response = await fetch(
 
@@ -55,12 +53,11 @@ export default class Usuarios {
 
             const BodyResponse = await Response.json()
 
-            return {'status': Response.status, userID : BodyResponse?.IdUsuario, acessToken : BodyResponse?.AcessToken};
+            return {status: Response.status, userID : BodyResponse?.IdUsuario};
             
         } catch (error:unknown) {
             // logger.error({err : error, pEmail});
-            console.error(error)
-            return {'status': 0, acessToken: ''};
+            throw new Error("Erro ao Realizar Login", { cause : error })
         }
     }
 
@@ -81,50 +78,33 @@ export default class Usuarios {
                 }
             );
 
-            const BodyResponse : Usuario = await Response.json().then(data => {return data.PerfilUsuario});
-
-            if(Response.status != 200) {
-
-                if (Response.status != 401) {
-                    throw new Error("Erro ao Buscar Usuário", {'cause' : BodyResponse}); // Vai dar um erro lá na frente quando eu tentar usar a o BodyResponse pois a caso for um erro as propriedades são diferentes, mas vamos prosseguir
-                }
-                else{
-                    const res = await fetch(
-                        'http://localhost:3001/Authorization/AttAcessToken', 
-                        {
-                            mode:'cors',
-                            method: 'get',
-                            credentials: 'include'
-                        }
-                    );
-
-                    if (res.status == 204){
-                        const tt = await fetch(
-
-                            'http://localhost:3001/Usuarios/Perfil', 
-
-                            {
-                                mode:'cors',
-                                method: 'get',
-                                credentials: 'include',
-                                headers: {
-                                    'Content-Type': 'application/json', // Tipo de conteudo da requisição
-                                    "accept" : 'application/json' // Conteudo que aceitamos como resposta 
-                                }
-                            }
-                        );
-
-                        const ttt : Usuario = await tt.json().then(data => {return data.PerfilUsuario});;
-
-                        return ttt;
-                    }
-                    else {
-                        console.error(await res.json())
-                    }
-                }
+            var usuario : Usuario = {
+                Cpf : "Indefinido",
+                Data_Nascimento : "Indefinido",
+                Id_Usuario : 0,
+                Nome : "Indefinido"
             }
 
-            return BodyResponse;            
+            switch (Response.status) {
+                case 200:
+                    usuario = await Response.json();
+                    break
+
+                case 401:
+                    const renovandoAcessToken = await Auth.renovaAcessToken();
+
+                    if (renovandoAcessToken == "ok") {
+                        usuario = await this.BuscaUsuario();
+                    }
+
+                    break;
+            
+                default:
+                    throw new Error("Erro ao Buscar Usuário", {cause : await Response.json()})
+
+            }
+            
+            return usuario;
 
         } catch (error) {
             console.error(error)
@@ -155,10 +135,10 @@ export default class Usuarios {
         }
     }
 
-    static async AtivaUsuario (userID: number) : Promise<number> {
+    static async AtivaUsuario () : Promise<number> {
         try {
             const Response = await fetch(
-                `http://localhost:3001/Usuarios/AtivarPerfil/${userID}`,
+                `http://localhost:3001/Usuarios/AtivarPerfil`,
                 {
                     method : 'PATCH',
                     credentials : 'include',    

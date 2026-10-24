@@ -11,10 +11,7 @@ export function useDesativaPerfil() {
         try {
             erroContext?.setLoading(true);
 
-            const cookiestorage = document.cookie;
-            const token = cookiestorage.split('sessionToken=')[1];
-
-            const Response = await Usuarios.DesativaPerfil(token);
+            const Response = await Usuarios.DesativaPerfil();
 
             if (Response != 204) {
                 throw new Error(`Erro ao Desativar Usuário, Tente Novamente Mais Tarde`);

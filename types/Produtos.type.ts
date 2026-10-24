@@ -1,4 +1,4 @@
-export type Produtos = {
+export type Produto = { 
     Nome : string,
     Id_Produto : number,
     Descricao : string,

@@ -1,12 +1,10 @@
 import { useContext } from "react";
 import Usuarios from "@/features/Usuarios/Services/Usuarios.service";
-import { UserContext } from "@/context/UserContext/userContext.context";
 import { useRouter } from "next/navigation";
 import { ErroContext } from "@/context/ErroContext/erroContext.context";
 
 export function useAtivarUsuario() {
 
-    const userContext = useContext(UserContext);
     const erroContext = useContext(ErroContext);
     const router = useRouter();
 
@@ -14,11 +12,7 @@ export function useAtivarUsuario() {
         erroContext?.setLoading(true);
         try {
 
-            if (!userContext?.userID) {
-                throw new Error('Erro ao Encontrar Usuário');
-            }
-
-            const AtivandoUsuario = await Usuarios.AtivaUsuario(userContext.userID);
+            const AtivandoUsuario = await Usuarios.AtivaUsuario();
 
             if (AtivandoUsuario != 204) {
                 throw new Error("Erro Ao Ativar Perfil do Usuário, Tente Novamente Mais Tarde!");
@@ -26,10 +20,10 @@ export function useAtivarUsuario() {
 
             erroContext?.setNotify({
                 Title : "Sucesso!",
-                Message : "Usuário Ativado Com Sucesso"
+                Message : "Usuário Ativado Com Sucesso, logue novamente!"
             });
 
-            router.replace('/Usuarios/AtivarUsuario');
+            router.replace('/Usuarios/Perfil');
 
         } catch (error) {
 

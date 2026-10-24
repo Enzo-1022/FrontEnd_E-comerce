@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Usuarios from "@/features/Usuarios/Services/Usuarios.service";
 import Usuario from "@/features/Usuarios/interfaces/Usuario.interface";
 import { useRouter } from "next/navigation";
@@ -30,6 +30,7 @@ export function usePerfilUsuario(){
             return;
         } catch (error) {   
 
+            console.error(error)
             erroContext?.setErro(`${error}`);
             erroContext?.setUrl("/Login");
             router.replace("/Erro");
@@ -50,5 +51,5 @@ export function usePerfilUsuario(){
         []
     );
 
-    return { dados, setDados }
+    return { dados }
 }

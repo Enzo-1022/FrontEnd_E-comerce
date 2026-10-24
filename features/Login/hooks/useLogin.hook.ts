@@ -73,15 +73,15 @@ export function useLogin() {
                     break;
                 
                 default:
-                    throw new Error("Erro ao Realizar login, Tente Novamente Mais Tarde!")
+                    throw new Error("Erro ao Realizar login, Tente Novamente Mais Tarde!", { cause : "Status não mapeado"})
             }
-            
+
         } catch (error) {
 
             erroContext?.setErro(`${error}`);
             erroContext?.setUrl('/Login');
             router.replace('/Erro');
-    
+
         } finally {
             erroContext?.setLoading(false);
         }
